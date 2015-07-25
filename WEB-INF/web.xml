@@ -4,5 +4,24 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
+	<servlet>
+		<servlet-name>ItemInfoChangeListServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeListServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeListServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemInfoChangeServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeServlet</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
 
