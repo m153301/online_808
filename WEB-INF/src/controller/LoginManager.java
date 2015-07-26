@@ -38,10 +38,10 @@ public class LoginManager{
 	
 	//重複チェック
 	public IpHistory checkOverlap(String ip){
-		IpHistoryDAO dao = new IpHistoryDAO();
-		this.connection = dao.createConnection();
-		int count = dao.overlap(ip, connection);
-		dao.closeConnection(this.connection);
+		IpHistoryDAO check = new IpHistoryDAO();
+		this.connection = check.createConnection();
+		int count = check.overlap(ip, connection);
+		check.closeConnection(this.connection);
 		this.connection = null;
 		//ipアドレスの登録があった場合
 		if(count != 0){
@@ -61,35 +61,35 @@ public class LoginManager{
 	}
 	
 	private IpHistory getCount(String ip){
-		IpHistoryDAO dao = new IpHistoryDAO();
-		this.connection = dao.createConnection();
-		IpHistory count = dao.getCount(ip, connection);
+		IpHistoryDAO fail_count = new IpHistoryDAO();
+		this.connection = fail_count.createConnection();
+		IpHistory count = fail_count.getCount(ip, connection);
 		this.connection = null;
 		return count;
 	}
 	
 	private void ipRegist(String ip){
-		IpHistoryDAO dao = new IpHistoryDAO();
-		this.connection = dao.createConnection();
-		dao.ipRegist(ip, connection);
-		dao.closeConnection(this.connection);
+		IpHistoryDAO regist = new IpHistoryDAO();
+		this.connection = regist.createConnection();
+		regist.ipRegist(ip, connection);
+		regist.closeConnection(this.connection);
 		this.connection = null;
 	}
 	
 
 	public void incrementCount(String ip){
-		IpHistoryDAO dao = new IpHistoryDAO();
-		this.connection = dao.createConnection();
-		dao.increment(ip,connection);
-		dao.closeConnection(this.connection);
+		IpHistoryDAO plus = new IpHistoryDAO();
+		this.connection = plus.createConnection();
+		plus.increment(ip,connection);
+		plus.closeConnection(this.connection);
 		this.connection = null;
 	}
 	
 	public void resetCount(String ip){
-		IpHistoryDAO dao = new IpHistoryDAO();
-		this.connection = dao.createConnection();
-		dao.reset(ip, connection);
-		dao.closeConnection(this.connection);
+		IpHistoryDAO reset = new IpHistoryDAO();
+		this.connection = reset.createConnection();
+		reset.reset(ip, connection);
+		reset.closeConnection(this.connection);
 		this.connection = null;
 	}
 }
