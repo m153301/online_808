@@ -20,8 +20,10 @@ public class ItemDAO extends DriverAccessor{
 	public List<Item> selectItemAll(){
 		try{
 			String sql = "select * from item;";
+
 			Connection con = null;
 			con = createConnection();
+
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
