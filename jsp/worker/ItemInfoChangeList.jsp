@@ -22,20 +22,20 @@
 					<td style="vertical-align: middle; width: 150px; text-align: center;">在庫</td>
 				</tr>
 				<%
-				List<Item> items = (List<Item>)request.getAttribute("items");
-				HttpSession hs = request.getSession();
-				hs.setAttribute("items", items);
-				for( Item item : items )
-				{
-					out.println("<tr>");
-					out.println("<td style='text-align: center; width: 40px; height: 60px;'>");
-					out.println("<input type='radio' name='item_id' value=" + item.getItemId() + ">");
-					out.println("</td>");
-					out.println("<td style='text-align: center; width: 75px; height: 60px;'>" + item.getItemName() + "</td>");
-					out.println("<td style='text-align: center; width: 150px; height: 60px;'>" + item.getItemPrice() + "円</td>");
-					out.println("<td style='vertical-align: middle; width: 150px; text-align: center;'>あと" + item.getItemStock() + "個</td>");
-					out.println("</tr>");
-				}
+					List<Item> items = (List<Item>)request.getAttribute("items");
+					HttpSession hs = request.getSession();
+					hs.setAttribute("items", items);
+					for( Item item : items )
+					{
+						out.println("<tr>");
+						out.println("<td style='text-align: center; width: 40px; height: 60px;'>");
+						out.println("<input type='radio' name='item_id' value=" + item.getItemId() + ">");
+						out.println("</td>");
+						out.println("<td style='text-align: center; width: 75px; height: 60px;'>" + item.getItemName() + "</td>");
+						out.println("<td style='text-align: center; width: 150px; height: 60px;'>" + item.getItemPrice() + "円</td>");
+						out.println("<td style='vertical-align: middle; width: 150px; text-align: center;'>あと" + item.getItemStock() + "個</td>");
+						out.println("</tr>");
+					}
 				%>
 				<tr>
 					<td colspan="4" rowspan="1" style="text-align: center;">
