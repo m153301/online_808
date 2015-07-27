@@ -7,9 +7,10 @@
 </head>
 <body>
 <%
-	User user = (User)session.getAttribute("worker");
-	out.println(user.getUserName() + "さん ようこそ！<br>");
+//	User user = (User)session.getAttribute("worker");
+//	out.println(user.getUserName() + "さん ようこそ！<br>");
 %>
+
 <br>
 	<div class="title">
 		☆商品☆<br>
