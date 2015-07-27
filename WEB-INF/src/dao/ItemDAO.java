@@ -13,26 +13,29 @@ import utility.DriverAccessor;
 
 import java.sql.SQLException;
 
-import beans.Item;
 
 public class ItemDAO extends DriverAccessor{
 
-	//商品を登録する
-	public void insertItem(Item item, Connection connection){
+	//商品を格納する
+	public void insertItem(int itemId, String itemName, int itemPrice, int itemStock){
+		Connection con = null;
+		con = createConnection();
+
 		try{
 
 			String sql = "insert into item values(?,?,?,?)";
 
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, item.getItemId());
-			stmt.setString(2, item.getItemName());
-			stmt.setInt(3, item.getItemPrice());
-			stmt.setInt(4, item.getItemStock());
+			stmt.setInt(1, itemId);
+			stmt.setString(2, itemName);
+			stmt.setInt(3, itemPrice);
+			stmt.setInt(4, itemStock);
 
 			stmt.executeUpdate();
-
 			stmt.close();
+			con = null;
+
 		}catch(SQLException e){
 
 			e.printStackTrace();
@@ -42,14 +45,17 @@ public class ItemDAO extends DriverAccessor{
 		}
 	}
 
-	//登録した商品の商品IDを検索する
-	public int selectItemIdByItemName(String item_name, Connection connection){
+	//格納した商品の商品IDを検索する
+	public int selectItemIdByItemName(String item_name){
+
+		Connection con = null;
+		con = createConnection();
 
 		int item_id=0;
 		try{
 
 			String sql = "select item_id from item where item_name = '"+ item_name +"'";
-			Statement stmt = connection.createStatement();
+			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
 			rs.next();
@@ -57,6 +63,8 @@ public class ItemDAO extends DriverAccessor{
 
 			stmt.close();
 			rs.close();
+			con = null;
+
 		}catch(SQLException e){
 
 			e.printStackTrace();

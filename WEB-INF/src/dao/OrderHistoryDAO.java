@@ -7,44 +7,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import beans.OrderHistory;
 import utility.DriverAccessor;
 
 public class OrderHistoryDAO extends DriverAccessor{
 
 	//発注した商品を格納する
-	public void insertOrderHistory(OrderHistory orderHistory, Connection connection){
+	public void insertOrderHistory(int orderId, String userId, int itemId, int orderQuantity, java.util.Date date){
+
+		Connection con = null;
+		con = createConnection();
 
 		try{
-
 
 			//  SQLコマンド
 			String sql = "insert into order_history values(?, ?, ?, ?, ?)";
 
 			//  SQLのコマンドを実行する
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 
-			java.util.Date d = new java.util.Date();
-			java.sql.Date d2 = new java.sql.Date(d.getTime());
+			java.sql.Date d2 = new java.sql.Date(date.getTime());
 
-			/*
-			System.out.println(ordered.getOrderId());
-			System.out.println(ordered.getUserId());
-			System.out.println(ordered.getItemId());
-			System.out.println(ordered.getOrderQuantity());
-			System.out.println(d2);
-			*/
-
-			stmt.setInt(1, orderHistory.getOrderId());
-			stmt.setString(2, orderHistory.getUserId());
-			stmt.setInt(3, orderHistory.getItemId());
+			stmt.setInt(1, orderId);
+			stmt.setString(2, userId);
+			stmt.setInt(3, itemId);
 			stmt.setDate(4, d2);
-			stmt.setInt(5, orderHistory.getOrderQuantity());
+			stmt.setInt(5, orderQuantity);
 
 			stmt.executeUpdate();
 
 			//  終了処理
 			stmt.close();
+
+			con = null;
 
 			}
 			catch(SQLException e){
