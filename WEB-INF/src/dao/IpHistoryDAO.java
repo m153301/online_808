@@ -10,17 +10,19 @@ import utility.DriverAccessor;
 
 public class IpHistoryDAO extends DriverAccessor{
 	
-	public void ipRegist(String ip, Connection connection){
-		
+	//ipアドレスを登録する
+	public void insertIpHistoryIP(String ip){
+		Connection con = createConnection();
 		try{
 			String sql="insert into ip_history(ip,fail_count) values (?, 0);";
 		
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			stmt.setString(1,ip);
 			stmt.executeUpdate();
 			
 			stmt.close();
+			con = null;
 		
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -30,12 +32,13 @@ public class IpHistoryDAO extends DriverAccessor{
 	}
 
 	//ログイン失敗回数をとってくる
-	public IpHistory getCount(String ip, Connection connection) {
+	public IpHistory selectIpHistoryFailCountByIp(String ip) {
 		// TODO Auto-generated method stub
+		Connection con = createConnection();
 		try{
 			String sql="select fail_count from ip_histrory where ip = ?;";
 			
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			stmt.setString(1,ip);
 			
@@ -59,34 +62,41 @@ public class IpHistoryDAO extends DriverAccessor{
 		}
 	}
 
-	public void increment(String ip, Connection connection) {
+	public void incrementIpHistoryFailCountByIp(String ip) {
 		// TODO Auto-generated method stub
+		Connection con = null;
+		con = createConnection();
 		try{
 			String sql = "update ip_history set fail_count = fail_count + 1 where ip =?;";
 			
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			stmt.setString(1,ip);
 			stmt.executeUpdate();
 			
 			stmt.close();
+			con = null;
 		}catch(SQLException e){
 			e.printStackTrace();
+			
 		}finally{
 			
 		}
 	}
 	
-	public void reset(String ip, Connection conneciton){
+	public void resetIpHistoryFailCountByIp(String ip){
+		Connection con = null;
+		con = createConnection();
 		try{
 			String sql = "update ip_history set fail_count = 0 where ip = ?;";
 			
-			PreparedStatement stmt = conneciton.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			stmt.setString(1,ip);
 			stmt.executeUpdate();
 			
 			stmt.close();
+			con = null;
 		}catch(SQLException e){
 			
 			e.printStackTrace();
@@ -95,12 +105,14 @@ public class IpHistoryDAO extends DriverAccessor{
 		}
 	}
 
-	public int overlap(String ip, Connection connection) {
+	public int selectIpHistoryCountByIp(String ip) {
+		Connection con = null;
+		con = createConnection();
 		// TODO Auto-generated method stub
 		try{
 			String sql = "select count(1) from ip_history where ip = ?;";
 			
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, ip);
 			
 			ResultSet rs=stmt.executeQuery();
@@ -110,7 +122,7 @@ public class IpHistoryDAO extends DriverAccessor{
 			
 			stmt.close();
 			rs.close();
-			
+			con = null;
 			return count;
 		}catch(SQLException e){
 			e.printStackTrace();

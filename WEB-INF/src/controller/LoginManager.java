@@ -9,19 +9,15 @@ import beans.IpHistory;
 
 //とりあえず作ったからあとで直す
 public class LoginManager{
-	private Connection connection = null;
 	
 	public LoginManager(){
 	}
 	
-	public User certifyUser(String id, String pass){
-		UserDAO dao = new UserDAO();
+	public User selectUser(String id, String pass){
+		UserDAO select = new UserDAO();
 	
-		User user = dao.selectUserById(id);
+		User user = select.selectUserById(id);
 		
-		dao.closeConnection(this.connection);
-		
-		this.connection = null;
 		
 		if(user==null)
 			return null;
@@ -36,59 +32,46 @@ public class LoginManager{
 	}
 	
 	//重複チェック
-	public IpHistory checkOverlap(String ip){
-		IpHistoryDAO check = new IpHistoryDAO();
-		this.connection = check.createConnection();
-		int count = check.overlap(ip, connection);
-		check.closeConnection(this.connection);
-		this.connection = null;
+	public IpHistory selectIpHistoryCount(String ip){
+		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
+		int count = ipHistoryDAO.selectIpHistoryCountByIp(ip);
 		//ipアドレスの登録があった場合
 		if(count != 0){
-			incrementCount(ip);
+			incrementIpHistoryFailCount(ip);
 			
 		}
 		
 		//ipアドレスの登録がない場合
 		else{
-			ipRegist(ip);
+			insertIpHistoryIp(ip);
 		}
 		
 		//最後に失敗回数を持って帰る
-		IpHistory fail_count = getCount(ip);
-		return fail_count;
+		IpHistory failCount = selectIpHistoryFailCount(ip);
+		return failCount;
 		
 	}
 	
-	private IpHistory getCount(String ip){
-		IpHistoryDAO fail_count = new IpHistoryDAO();
-		this.connection = fail_count.createConnection();
-		IpHistory count = fail_count.getCount(ip, connection);
-		this.connection = null;
-		return count;
+	private IpHistory selectIpHistoryFailCount(String ip){
+		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
+		IpHistory failCount = ipHistoryDAO.selectIpHistoryFailCountByIp(ip);
+		return failCount;
 	}
 	
-	private void ipRegist(String ip){
-		IpHistoryDAO regist = new IpHistoryDAO();
-		this.connection = regist.createConnection();
-		regist.ipRegist(ip, connection);
-		regist.closeConnection(this.connection);
-		this.connection = null;
+	private void insertIpHistoryIp(String ip){
+		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
+		ipHistoryDAO.insertIpHistoryIP(ip);
+		
 	}
 	
 
-	public void incrementCount(String ip){
-		IpHistoryDAO plus = new IpHistoryDAO();
-		this.connection = plus.createConnection();
-		plus.increment(ip,connection);
-		plus.closeConnection(this.connection);
-		this.connection = null;
+	public void incrementIpHistoryFailCount(String ip){
+		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
+		ipHistoryDAO.incrementIpHistoryFailCountByIp(ip);
 	}
 	
-	public void resetCount(String ip){
-		IpHistoryDAO reset = new IpHistoryDAO();
-		this.connection = reset.createConnection();
-		reset.reset(ip, connection);
-		reset.closeConnection(this.connection);
-		this.connection = null;
+	public void resetIpHistoryFailCount(String ip){
+		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
+		ipHistoryDAO.resetIpHistoryFailCountByIp(ip);
 	}
 }

@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String user_id = request.getParameter("id");
+		String userId = request.getParameter("id");
 		String password = request.getParameter("pass");
 		
 		InetAddress addr = InetAddress.getLocalHost();
@@ -40,9 +40,9 @@ public class LoginServlet extends HttpServlet{
 		
 		//ipアドレスの重複チェック
 		
-		LoginManager check = new LoginManager();
+		LoginManager loginManager = new LoginManager();
 		//登録がない場合はインクリメントして失敗回数をもってくる
-		IpHistory count = check.checkOverlap(ip);
+		IpHistory count = loginManager.selectIpHistoryCount(ip);
 
 		
 		PasswordEncryption passenc = new PasswordEncryption();
@@ -50,9 +50,8 @@ public class LoginServlet extends HttpServlet{
 		
 		System.out.println(password);
 		
-		LoginManager manager = new LoginManager();
 		
-		User user = manager.certifyUser(user_id, password);
+		User user = loginManager.selectUser(userId, password);
 		
 		
 		
@@ -66,13 +65,13 @@ public class LoginServlet extends HttpServlet{
 			if(null==user){
 				request.setAttribute("error", "IDまたはパスワードが間違っています。");	
 				//失敗してるからincrementする
-				manager.incrementCount(ip);
+				loginManager.incrementIpHistoryFailCount(ip);
 				getServletContext().getRequestDispatcher("/jsp/common/Login.jsp").forward(request, response);
 			}
 			
 			else{
 				//失敗回数のリセット
-				manager.resetCount(ip);
+				loginManager.resetIpHistoryFailCount(ip);
 				HttpSession session = request.getSession();
 				
 				if(user.getRole().equals("customer") ){
