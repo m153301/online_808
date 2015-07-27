@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet{
 		
 		LoginManager loginManager = new LoginManager();
 		//登録がない場合はインクリメントして失敗回数をもってくる
-		IpHistory count = loginManager.checkOverlapCount(ip);
+		int failCount = loginManager.checkOverlapCount(ip);
 
 		
 		PasswordEncryption passenc = new PasswordEncryption();
@@ -55,26 +55,29 @@ public class LoginServlet extends HttpServlet{
 		
 		
 		
-		//もし10回パスワード間違った場合は管理者に連絡するってことで
-		if(count.getFail_count() >= 11){
-			request.setAttribute("error", "もうはいれませーん");
+		//もし10回以上パスワード間違った場合はシステムにはアクセスできなくなる
+		if(failCount >= 10){
+			request.setAttribute("error", "You don't access to this system.");
 			getServletContext().getRequestDispatcher("/jsp/common/Login.jsp").forward(request, response);
 		}
 		
 		else{
+			//ユーザが持ってこれていない場合．
 			if(user==null){
 				request.setAttribute("error", "IDまたはパスワードが間違っています。");	
 				//失敗してるからincrementする
 				loginManager.incrementIpHistoryFailCountByIp(ip);
 				getServletContext().getRequestDispatcher("/jsp/common/Login.jsp").forward(request, response);
 			}
-			
 			else{
-				//失敗回数のリセット
+				//一回でもログインに成功したら失敗回数のリセット
 				loginManager.resetIpHistoryFailCountByIp(ip);
 				HttpSession session = request.getSession();
 				
+				//SingleAccessPointの概念に基づきログインページは1つ
+				//user.roleに基づきそれぞれのtopページへ遷移
 				if(user.getRole().equals("customer") ){
+					//user.roleがcustomerの場合，customerというsessionを保持
 					session.setAttribute("customer",user);
 					
 //					おすすめ情報をCustomerTopに渡す
@@ -87,6 +90,7 @@ public class LoginServlet extends HttpServlet{
 				}
 				
 				else if(user.getRole().equals("worker")){
+					//user/roleがworkerならworkerというsessionを保持
 					session.setAttribute("worker", user);
 					
 					getServletContext().getRequestDispatcher("/jsp/worker/WorkerTop.jsp").forward(request, response);

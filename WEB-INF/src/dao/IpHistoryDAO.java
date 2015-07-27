@@ -32,7 +32,7 @@ public class IpHistoryDAO extends DriverAccessor{
 	}
 
 	//ログイン失敗回数をとってくる
-	public IpHistory selectIpHistoryFailCountByIp(String ip) {
+	public int selectIpHistoryFailCountByIp(String ip) {
 		// TODO Auto-generated method stub
 		Connection con = createConnection();
 		try{
@@ -46,18 +46,17 @@ public class IpHistoryDAO extends DriverAccessor{
 			
 			rs.first();
 			
-			IpHistory count = new IpHistory();
-			count.setFail_count(rs.getInt("fail_count"));
+			int failCount = rs.getInt("fail_count");
 			
 			stmt.close();
 			rs.close();
 			con = null;
 			
-			return count;
+			return failCount;
 			
 		}catch(SQLException e){
 			e.printStackTrace();
-			return null;
+			return 0;
 		}finally{
 			
 		}
