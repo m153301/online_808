@@ -1,11 +1,10 @@
 package controller;
 
-import java.sql.Connection;
 
 import dao.IpHistoryDAO;
 import dao.UserDAO;
 import beans.User;
-import beans.IpHistory;
+
 
 //とりあえず作ったからあとで直す
 public class LoginManager{
@@ -23,29 +22,25 @@ public class LoginManager{
 	}
 	
 	//重複チェック
-	public IpHistory checkOverlapCount(String ip){
+	public int checkOverlapCount(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		int count = ipHistoryDAO.selectIpHistoryCountByIp(ip);
-		//ipアドレスの登録があった場合
-		if(count != 0){
-			incrementIpHistoryFailCountByIp(ip);
-			
-		}
 		
-		//ipアドレスの登録がない場合
-		else{
+		//ipアドレスの登録がなかった場合
+		if(count !=0){
 			insertIpHistoryIp(ip);
 		}
+		//登録があった場合は何もしない
 		
-		//最後に失敗回数を持って帰る
-		IpHistory failCount = selectIpHistoryFailCountByIp(ip);
+		//最後に失敗回数を確認し，その値を返す．
+		int failCount = selectIpHistoryFailCountByIp(ip);
 		return failCount;
 		
 	}
 	
-	private IpHistory selectIpHistoryFailCountByIp(String ip){
+	private int selectIpHistoryFailCountByIp(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
-		IpHistory failCount = ipHistoryDAO.selectIpHistoryFailCountByIp(ip);
+		int failCount = ipHistoryDAO.selectIpHistoryFailCountByIp(ip);
 		return failCount;
 	}
 	
