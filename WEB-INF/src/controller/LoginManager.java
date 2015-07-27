@@ -7,7 +7,7 @@ import dao.UserDAO;
 import beans.User;
 import beans.IpHistory;
 
-//とりあえず作ったからあとで直す
+
 public class LoginManager{
 	private Connection connection = null;
 	

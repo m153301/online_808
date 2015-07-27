@@ -13,7 +13,7 @@ public class IpHistoryDAO extends DriverAccessor{
 	public void ipRegist(String ip, Connection connection){
 		
 		try{
-			String sql="insert into ip_lock(ip,fail_count) values (?, 0);";
+			String sql="insert into ip_history(ip,fail_count) values (?, 0);";
 		
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -33,7 +33,7 @@ public class IpHistoryDAO extends DriverAccessor{
 	public IpHistory getCount(String ip, Connection connection) {
 		// TODO Auto-generated method stub
 		try{
-			String sql="select fail_count from ip_lock where ip = ?;";
+			String sql="select fail_count from ip_histrory where ip = ?;";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -62,7 +62,7 @@ public class IpHistoryDAO extends DriverAccessor{
 	public void increment(String ip, Connection connection) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "update ip_lock set fail_count = fail_count + 1 where ip =?;";
+			String sql = "update ip_history set fail_count = fail_count + 1 where ip =?;";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			
@@ -79,7 +79,7 @@ public class IpHistoryDAO extends DriverAccessor{
 	
 	public void reset(String ip, Connection conneciton){
 		try{
-			String sql = "update ip_lock set fail_count = 0 where ip = ?;";
+			String sql = "update ip_history set fail_count = 0 where ip = ?;";
 			
 			PreparedStatement stmt = conneciton.prepareStatement(sql);
 			
@@ -98,7 +98,7 @@ public class IpHistoryDAO extends DriverAccessor{
 	public int overlap(String ip, Connection connection) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "select count(1) from ip_lock where ip = ?;";
+			String sql = "select count(1) from ip_history where ip = ?;";
 			
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, ip);
