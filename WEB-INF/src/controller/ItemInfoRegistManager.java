@@ -24,8 +24,8 @@ public class ItemInfoRegistManager {
 		ItemDAO itemDAO = new ItemDAO();
 		this.connection = itemDAO.createConnection();
 
-		itemDAO.registItemInfoDAO(item, connection);
-		int item_id = itemDAO.selectItemIdDAO(item.getItemName(),connection);
+		itemDAO.insertItem(item, connection);
+		int item_id = itemDAO.selectItemIdByItemName(item.getItemName(),connection);
 		itemDAO.closeConnection(this.connection);
 
 		this.connection = null;
@@ -39,7 +39,7 @@ public class ItemInfoRegistManager {
 		OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
 		this.connection = orderHistoryDAO.createConnection();
 
-		orderHistoryDAO.registItemLog(orderHistory, connection);
+		orderHistoryDAO.insertOrderHistory(orderHistory, connection);
 		orderHistoryDAO.closeConnection(this.connection);
 
 		this.connection = null;

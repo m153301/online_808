@@ -18,7 +18,7 @@ import beans.Item;
 public class ItemDAO extends DriverAccessor{
 
 	//商品を登録する
-	public void registItemInfoDAO(Item item, Connection connection){
+	public void insertItem(Item item, Connection connection){
 		try{
 
 			String sql = "insert into item values(?,?,?,?)";
@@ -43,7 +43,7 @@ public class ItemDAO extends DriverAccessor{
 	}
 
 	//登録した商品の商品IDを検索する
-	public int selectItemIdDAO(String item_name, Connection connection){
+	public int selectItemIdByItemName(String item_name, Connection connection){
 
 		int item_id=0;
 		try{

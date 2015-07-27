@@ -13,7 +13,7 @@ import utility.DriverAccessor;
 public class OrderHistoryDAO extends DriverAccessor{
 
 	//発注した商品を格納する
-	public void registItemLog(OrderHistory orderHistory, Connection connection){
+	public void insertOrderHistory(OrderHistory orderHistory, Connection connection){
 
 		try{
 
