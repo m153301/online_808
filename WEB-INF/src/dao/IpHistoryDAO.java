@@ -36,7 +36,7 @@ public class IpHistoryDAO extends DriverAccessor{
 		// TODO Auto-generated method stub
 		Connection con = createConnection();
 		try{
-			String sql="select fail_count from ip_histrory where ip = ?;";
+			String sql="select fail_count from ip_history where ip = ?;";
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
