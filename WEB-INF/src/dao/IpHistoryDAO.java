@@ -51,6 +51,7 @@ public class IpHistoryDAO extends DriverAccessor{
 			
 			stmt.close();
 			rs.close();
+			con = null;
 			
 			return count;
 			
@@ -62,6 +63,7 @@ public class IpHistoryDAO extends DriverAccessor{
 		}
 	}
 
+	//失敗買い数をincrementする
 	public void incrementIpHistoryFailCountByIp(String ip) {
 		// TODO Auto-generated method stub
 		Connection con = null;

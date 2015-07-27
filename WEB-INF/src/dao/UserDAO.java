@@ -10,16 +10,18 @@ import utility.DriverAccessor;
 
 public class UserDAO extends DriverAccessor{
 
-	public User selectUserById(String id) {
+	public User selectUserByIdandPass(String id, String pass) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		con = createConnection();
 		try{
 			
-			String sql="select * from user where user_id = '"+id+"' ";
+			String sql="select * from user where user_id = (?) and password = (?) ";
 			
 			//PreparedStatementの利用
 			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1,id);
+			stmt.setString(2,pass);
 			ResultSet rs = stmt.executeQuery();
 			
 			rs.first();

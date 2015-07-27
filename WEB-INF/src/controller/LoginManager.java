@@ -13,31 +13,22 @@ public class LoginManager{
 	public LoginManager(){
 	}
 	
-	public User selectUser(String id, String pass){
-		UserDAO select = new UserDAO();
+	public User selectUserByIdandPass(String id, String pass){
+		UserDAO userDAO = new UserDAO();
 	
-		User user = select.selectUserById(id);
+		User user = userDAO.selectUserByIdandPass(id,pass);
 		
-		
-		if(user==null)
-			return null;
-		
-		else if(pass.equals(user.getPassword())){
-			return user;
-		}
-		
-		else
-			return null;
+		return user;
 		
 	}
 	
 	//重複チェック
-	public IpHistory selectIpHistoryCount(String ip){
+	public IpHistory checkOverlapCount(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		int count = ipHistoryDAO.selectIpHistoryCountByIp(ip);
 		//ipアドレスの登録があった場合
 		if(count != 0){
-			incrementIpHistoryFailCount(ip);
+			incrementIpHistoryFailCountByIp(ip);
 			
 		}
 		
@@ -47,12 +38,12 @@ public class LoginManager{
 		}
 		
 		//最後に失敗回数を持って帰る
-		IpHistory failCount = selectIpHistoryFailCount(ip);
+		IpHistory failCount = selectIpHistoryFailCountByIp(ip);
 		return failCount;
 		
 	}
 	
-	private IpHistory selectIpHistoryFailCount(String ip){
+	private IpHistory selectIpHistoryFailCountByIp(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		IpHistory failCount = ipHistoryDAO.selectIpHistoryFailCountByIp(ip);
 		return failCount;
@@ -65,12 +56,12 @@ public class LoginManager{
 	}
 	
 
-	public void incrementIpHistoryFailCount(String ip){
+	public void incrementIpHistoryFailCountByIp(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		ipHistoryDAO.incrementIpHistoryFailCountByIp(ip);
 	}
 	
-	public void resetIpHistoryFailCount(String ip){
+	public void resetIpHistoryFailCountByIp(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		ipHistoryDAO.resetIpHistoryFailCountByIp(ip);
 	}
