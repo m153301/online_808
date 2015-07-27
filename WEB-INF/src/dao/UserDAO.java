@@ -10,14 +10,16 @@ import utility.DriverAccessor;
 
 public class UserDAO extends DriverAccessor{
 
-	public User certifyUser(String id, Connection connection) {
+	public User selectUserById(String id) {
 		// TODO Auto-generated method stub
-try{
+		Connection con = null;
+		con = createConnection();
+		try{
 			
 			String sql="select * from user where user_id = '"+id+"' ";
 			
 			//PreparedStatementの利用
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 			
 			rs.first();
@@ -30,6 +32,7 @@ try{
 			
 			stmt.close();
 			rs.close();
+			con = null;
 			
 			return user;
 		}catch(SQLException e){

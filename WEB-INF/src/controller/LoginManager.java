@@ -7,7 +7,7 @@ import dao.UserDAO;
 import beans.User;
 import beans.IpHistory;
 
-
+//とりあえず作ったからあとで直す
 public class LoginManager{
 	private Connection connection = null;
 	
@@ -16,9 +16,8 @@ public class LoginManager{
 	
 	public User certifyUser(String id, String pass){
 		UserDAO dao = new UserDAO();
-		
-		this.connection = dao.createConnection();
-		User user = dao.certifyUser(id, this.connection);
+	
+		User user = dao.selectUserById(id);
 		
 		dao.closeConnection(this.connection);
 		
