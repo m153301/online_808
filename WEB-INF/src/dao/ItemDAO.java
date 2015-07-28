@@ -7,7 +7,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 import utility.DriverAccessor;
 
@@ -16,23 +15,31 @@ import java.sql.SQLException;
 
 public class ItemDAO extends DriverAccessor{
 
-	//商品を格納する
-	public void insertItem(int itemId, String itemName, int itemPrice, int itemStock){
+	//商品を格納し、商品IDを返す
+	public int insertItem(String itemName, int itemPrice, int itemStock){
+		PreparedStatement stmt = null;
 		Connection con = null;
 		con = createConnection();
+		ResultSet rs = null;
+		int autoIncKey = -1;
 
 		try{
 
-			String sql = "insert into item values(?,?,?,?)";
+			String sql = "insert into item(item_name, item_price, item_stock) values(?,?,?)";
 
-			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
 
-			stmt.setInt(1, itemId);
-			stmt.setString(2, itemName);
-			stmt.setInt(3, itemPrice);
-			stmt.setInt(4, itemStock);
+			stmt.setString(1, itemName);
+			stmt.setInt(2, itemPrice);
+			stmt.setInt(3, itemStock);
 
 			stmt.executeUpdate();
+
+			rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				autoIncKey = rs.getInt(1);
+			}
+
 			stmt.close();
 			con = null;
 
@@ -41,38 +48,21 @@ public class ItemDAO extends DriverAccessor{
 			e.printStackTrace();
 
 		} finally {
-
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		return autoIncKey;
 	}
-
-	//格納した商品の商品IDを検索する
-	public int selectItemIdByItemName(String item_name){
-
-		Connection con = null;
-		con = createConnection();
-
-		int item_id=0;
-		try{
-
-			String sql = "select item_id from item where item_name = '"+ item_name +"'";
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-
-			rs.next();
-			item_id = rs.getInt("item_id");
-
-			stmt.close();
-			rs.close();
-			con = null;
-
-		}catch(SQLException e){
-
-			e.printStackTrace();
-
-		} finally {
-
-		}
-		return item_id;
-	}
-
 }
