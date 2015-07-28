@@ -6,7 +6,9 @@ package servlet;
 /*****************************************************************************/
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +36,19 @@ public class ItemInfoRegistServlet extends HttpServlet{
 
 		request.setCharacterEncoding("UTF-8");
 
+		List<String> itemInfo = new ArrayList<String>();
+
+		itemInfo.add(request.getParameter("item_name"));
+		itemInfo.add(request.getParameter("item_price"));
+		itemInfo.add(request.getParameter("item_stock"));
+
+		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
+
+		List<String> errors = itemInfoRegistManager.validator(itemInfo);
+		request.setAttribute("errors", errors);
+
+		if(errors.isEmpty()){
+
 		//まず商品をItemテーブルに格納。最初は発注した数が在庫になる。
 		//item_idを返すようにする
 		String itemName = StringEscapeUtils.escapeHtml4(request.getParameter("item_name"));
@@ -43,7 +58,6 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		int itemPrice = Integer.parseInt(itemPriceString);
 		int itemStock = Integer.parseInt(itemStockString);
 
-		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
 		int itemId = itemInfoRegistManager.insertItem(itemName, itemPrice, itemStock);
 
 		//次に、いつ誰が何をいくつ登録・発注したかを記録する。
@@ -61,6 +75,10 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		*/
 
 		response.sendRedirect(response.encodeRedirectURL("./ItemInfoRegistDone.jsp"));
+		}
+		else{
+			getServletContext().getRequestDispatcher("/jsp/worker/ItemInfoRegist.jsp").forward(request, response);
+		}
 	}
 
 }
