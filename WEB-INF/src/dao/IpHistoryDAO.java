@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import beans.IpHistory;
 import utility.DriverAccessor;
 
 public class IpHistoryDAO extends DriverAccessor{
 	
 	//ipアドレスを登録する
 	public void insertIpHistoryIP(String ip){
-		Connection con = createConnection();
+		Connection con = null;
+		con = createConnection();
 		try{
 			String sql="insert into ip_history(ip,fail_count) values (?, 0);";
 		
@@ -34,7 +34,8 @@ public class IpHistoryDAO extends DriverAccessor{
 	//ログイン失敗回数をとってくる
 	public int selectIpHistoryFailCountByIp(String ip) {
 		// TODO Auto-generated method stub
-		Connection con = createConnection();
+		Connection con = null;
+		con = createConnection();
 		try{
 			String sql="select fail_count from ip_history where ip = ?;";
 			
@@ -62,7 +63,7 @@ public class IpHistoryDAO extends DriverAccessor{
 		}
 	}
 
-	//失敗買い数をincrementする
+	//失敗回数をincrementする
 	public void incrementIpHistoryFailCountByIp(String ip) {
 		// TODO Auto-generated method stub
 		Connection con = null;
