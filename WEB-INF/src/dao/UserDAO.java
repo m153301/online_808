@@ -10,7 +10,7 @@ import utility.DriverAccessor;
 
 public class UserDAO extends DriverAccessor{
 
-	public User selectUserByIdandPass(String id, String pass) {
+	public User selectUserByIdPass(String id, String pass) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		con = createConnection();

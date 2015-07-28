@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet{
 		//ipアドレスの重複チェック
 		
 		LoginManager loginManager = new LoginManager();
-		//登録がない場合はインクリメントして失敗回数をもってくる
+		//チェックしたら失敗回数をもってくる
 		int failCount = loginManager.checkOverlapCount(ip);
 
 		
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet{
 		System.out.println(password);
 		
 		
-		User user = loginManager.selectUserByIdandPass(userId, password);
+		User user = loginManager.selectUserByIdPass(userId, password);
 		
 		
 		

@@ -12,10 +12,10 @@ public class LoginManager{
 	public LoginManager(){
 	}
 	
-	public User selectUserByIdandPass(String id, String pass){
+	public User selectUserByIdPass(String id, String pass){
 		UserDAO userDAO = new UserDAO();
 	
-		User user = userDAO.selectUserByIdandPass(id,pass);
+		User user = userDAO.selectUserByIdPass(id,pass);
 		
 		return user;
 		
@@ -27,7 +27,7 @@ public class LoginManager{
 		int count = ipHistoryDAO.selectIpHistoryCountByIp(ip);
 		
 		//ipアドレスの登録がなかった場合
-		if(count !=0){
+		if(count ==0){
 			insertIpHistoryIp(ip);
 		}
 		//登録があった場合は何もしない
