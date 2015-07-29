@@ -6,7 +6,7 @@ public class ItemValidator {
 	public final int MAX_DIGIT_ITEM_PRICE = 12; 
 	public final int MAX_DIGIT_ITEM_STOCK = 3;  
 	
-	ItemValidator(){}
+	public ItemValidator(){}
 	
 	public String validateItemName(String itemName){
 		return ( itemName.length() > MAX_LENGTH_ITEM_NAME || itemName.length() < 0 ) ? "商品名は50文字以内でご入力下さい。" : null;
