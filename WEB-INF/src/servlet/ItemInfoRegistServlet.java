@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,10 +41,18 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		String itemPriceString = StringEscapeUtils.escapeHtml4(request.getParameter("item_price"));
 		String itemStockString = StringEscapeUtils.escapeHtml4(request.getParameter("item_stock"));
 
+		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
+
+		//不正な値が入っていないかチェック
+		List<String> errors = itemInfoRegistManager.validator(itemName, itemPriceString, itemStockString);
+		request.setAttribute("errors", errors);
+
+		//エラーが無かったら正規の処理へ
+		if(errors.isEmpty()){
+
 		int itemPrice = Integer.parseInt(itemPriceString);
 		int itemStock = Integer.parseInt(itemStockString);
 
-		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
 		int itemId = itemInfoRegistManager.insertItem(itemName, itemPrice, itemStock);
 
 		//次に、いつ誰が何をいくつ登録・発注したかを記録する。
@@ -61,6 +70,10 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		*/
 
 		response.sendRedirect(response.encodeRedirectURL("./ItemInfoRegistDone.jsp"));
+		}
+		else{
+			getServletContext().getRequestDispatcher("/jsp/worker/ItemInfoRegist.jsp").forward(request, response);
+		}
 	}
 
 }
