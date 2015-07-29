@@ -2,9 +2,9 @@ package validator;
 
 public class ItemValidator {
 
-	public final int MAX_LENGTH_ITEM_NAME = 50;
-	public final int MAX_DIGIT_ITEM_PRICE = 12; 
-	public final int MAX_DIGIT_ITEM_STOCK = 3;  
+	private final int MAX_LENGTH_ITEM_NAME = 50;
+	private final int MAX_DIGIT_ITEM_PRICE = 12; 
+	private final int MAX_DIGIT_ITEM_STOCK = 3;  
 	
 	public ItemValidator(){}
 	
