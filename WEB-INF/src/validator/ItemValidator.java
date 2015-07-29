@@ -19,20 +19,20 @@ public class ItemValidator {
 
 	public String validateItemPrice(String itemPrice){
 		if( !isNumber(itemPrice)){
-			return "単価は半角数字でご入力下さい。";
+			return ERROR_ITEM_PRICE_NOT_NUM;
 		}
 		else if(itemPrice.length() > MAX_DIGIT_ITEM_PRICE || itemPrice.length() < 0){
-			return "単価は12桁以内でご入力下さい。";
+			return ERROR_ITEM_PRICE_TOO_MUCH;
 		}
 		return null;
 	}
 	
 	public String validateItemStock(String itemStock){
 		if( !isNumber(itemStock)){
-			return "在庫は半角数字でご入力下さい。";
+			return ERROR_ITEM_STOCK_TOO_MUCH;
 		}
 		else if(itemStock.length() > MAX_DIGIT_ITEM_STOCK || itemStock.length() < 0){
-			return "在庫は3桁以内でご入力下さい。";
+			return ERROR_ITEM_STOCK_NOT_NUM;
 		}
 		return null;
 	}
