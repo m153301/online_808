@@ -14,8 +14,8 @@ public class ItemInfoChangeManager {
 		String itemNameError = itemValidator.validateItemName(itemName);
 		String itemPriceError = itemValidator.validateItemPrice(itemPrice);
 
-		if(itemNameError != null ) errors.add(itemValidator.validateItemName(itemName));
-		if(itemPriceError != null ) errors.add(itemValidator.validateItemName(itemName));
+		if(itemNameError != null ) errors.add(itemNameError);
+		if(itemPriceError != null ) errors.add(itemPriceError);
 
 		return errors;
 	}
