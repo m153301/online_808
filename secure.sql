@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.23, for osx10.10 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for osx10.10 (x86_64)
 --
 -- Host: localhost    Database: secure
 -- ------------------------------------------------------
--- Server version	5.6.23
+-- Server version	5.6.24
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `creditcard`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `creditcard` (
   `creditcard_id` int(11) NOT NULL AUTO_INCREMENT,
-  `creditcard_type` char(1) NOT NULL,
+  `creditcard_type` int(1) NOT NULL,
   `creditcard_number` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`creditcard_id`),
   UNIQUE KEY `creditcard_id` (`creditcard_id`)
@@ -84,6 +84,7 @@ CREATE TABLE `ip_history` (
 
 LOCK TABLES `ip_history` WRITE;
 /*!40000 ALTER TABLE `ip_history` DISABLE KEYS */;
+INSERT INTO `ip_history` VALUES ('157.105.55.27',2),('157.105.56.196',0);
 /*!40000 ALTER TABLE `ip_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +229,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('worker','957bfc4a017b69d7e3ace6f6947f63d5779fc0b7c620b8b908046f72cc88b2d3','worker','worker');
+INSERT INTO `user` VALUES ('work','a0afe8b354c81d63b85e516bd6e7ba9248e47617e9ffa3b79da1a23ecd01a449','worker','worker'),('worker','957bfc4a017b69d7e3ace6f6947f63d5779fc0b7c620b8b908046f72cc88b2d3','worker','worker');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,4 +267,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-26 23:53:24
+-- Dump completed on 2015-07-30  6:20:12
