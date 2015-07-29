@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import validator.ItemValidator;
 import beans.User;
 import controller.ItemInfoRegistManager;
 
@@ -43,11 +42,13 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		itemInfo.add(request.getParameter("item_price"));
 		itemInfo.add(request.getParameter("item_stock"));
 
-		ItemValidator itemValidator = new ItemValidator();
+		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
 
-		List<String> errors = itemValidator.validator(itemInfo);
+		//不正な値が入っていないかチェック
+		List<String> errors = itemInfoRegistManager.validator(itemInfo);
 		request.setAttribute("errors", errors);
 
+		//エラーが無かったら正規の処理へ
 		if(errors.isEmpty()){
 
 		//まず商品をItemテーブルに格納。最初は発注した数が在庫になる。
@@ -59,8 +60,6 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		int itemPrice = Integer.parseInt(itemPriceString);
 		int itemStock = Integer.parseInt(itemStockString);
 
-
-		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
 		int itemId = itemInfoRegistManager.insertItem(itemName, itemPrice, itemStock);
 
 		//次に、いつ誰が何をいくつ登録・発注したかを記録する。
