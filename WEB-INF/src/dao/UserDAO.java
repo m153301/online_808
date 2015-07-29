@@ -45,4 +45,35 @@ public class UserDAO extends DriverAccessor{
 		}
 		
 	}
+
+	public int selectCountCustomerByUserId(String userId) {
+		Connection con = null;
+		con = createConnection();
+		try{
+			String sql = "select count(1) user where user_id = (?);";
+			
+			//PreparedStatementの利用
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1,userId);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			rs.first();
+			
+			int count = rs.getInt("count(1)");
+			
+			stmt.close();
+			rs.close();
+			con = null;
+			
+			return count;
+		}catch(SQLException e){
+			e.printStackTrace();
+			//ここでretrun ０だと結果として重複なしとなってしまうため，2を返す
+			return 2;
+		}finally{
+			
+		}
+		
+	}
 }
