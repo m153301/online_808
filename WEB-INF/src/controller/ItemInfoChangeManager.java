@@ -11,8 +11,11 @@ public class ItemInfoChangeManager {
 		ItemValidator itemValidator = new ItemValidator();
 		List<String> errors = new ArrayList<String>();
 
-		errors.add(itemValidator.validateItemName(itemName));
-		errors.add(itemValidator.validateItemPrice(itemPrice));
+		String itemNameError = itemValidator.validateItemName(itemName);
+		String itemPriceError = itemValidator.validateItemPrice(itemPrice);
+
+		if(itemNameError != null ) errors.add(itemValidator.validateItemName(itemName));
+		if(itemPriceError != null ) errors.add(itemValidator.validateItemName(itemName));
 		
 		return errors;
 	}
