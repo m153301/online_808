@@ -16,5 +16,10 @@ public class ItemInfoChangeManager {
 		items = itemDAO.selectItemAll();
 		return items;
 	}
+	
+	public void updateItemById(int itemId, String itemName, int itemPrice){
+		ItemDAO itemDAO = new ItemDAO();
+		itemDAO.updateItemById(itemId, itemName, itemPrice);
+	}
 
 }

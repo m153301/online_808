@@ -5,6 +5,7 @@ package dao;
 /*****************************************************************************/
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -46,6 +47,30 @@ public class ItemDAO extends DriverAccessor{
 			e.printStackTrace();
 			return null;
 		} finally {
+		}
+	}
+
+	public void updateItemById(int itemId, String itemName, int itemPrice){
+		try{
+			String sql = "update item set item_name = ?, item_price = ? where item_id = ?;";
+
+			Connection con = null;
+			con = createConnection();
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+
+			stmt.setString(1, itemName);
+			stmt.setInt(2, itemPrice);
+			stmt.setInt(3, itemId);
+
+			stmt.executeUpdate();
+			stmt.close();
+			con = null;
+		}
+		catch(SQLException e){
+				e.printStackTrace();
+		}
+		finally {
 		}
 	}
 }
