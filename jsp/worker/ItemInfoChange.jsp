@@ -39,10 +39,6 @@
 				<td style="text-align: center; width: 180px; height: 60px;"><input name="item_price" value="<%= changedItem.getItemPrice() %>" type="text"></td>
 			</tr>
 			<tr>
-				<td style="text-align: center; width: 180px; height: 60px;">在庫</td>
-				<td style="text-align: center; width: 180px; height: 60px;"><input name="item_stock" value="<%= changedItem.getItemStock() %>" type="text"></td>
-			</tr>
-			<tr>
 				<td colspan="2" rowspan="1" style="text-align: center; width: 180px; height: 60px;">
 					<input type="submit" value="変更" />
 				</td>
