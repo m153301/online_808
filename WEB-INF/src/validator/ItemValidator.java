@@ -8,7 +8,7 @@ public class ItemValidator {
 	private String ERROR_ITEM_NAME_TOO_LONG = "商品名は" + Integer.toString(MAX_LENGTH_ITEM_NAME) + "以内でご入力下さい。";
 	private String ERROR_ITEM_PRICE_TOO_MUCH = "単価は" + Integer.toString(MAX_DIGIT_ITEM_PRICE) + "桁以内でご入力下さい。";
 	private String ERROR_ITEM_PRICE_NOT_NUM = "単価は半角数字でご入力下さい。";
-	private String ERROR_ITEM_STOCK_TOO_MUCH = "在庫数は" + Integer.toString(MAX_DIGIT_ITEM_STOCK) + "桁以内でご入力下さい。_";
+	private String ERROR_ITEM_STOCK_TOO_MUCH = "在庫数は" + Integer.toString(MAX_DIGIT_ITEM_STOCK) + "桁以内でご入力下さい。";
 	private String ERROR_ITEM_STOCK_NOT_NUM = "在庫数は半角数字でご入力下さい。";
 	
 	public ItemValidator(){}
