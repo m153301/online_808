@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import validator.ItemValidator;
 import beans.User;
 import controller.ItemInfoRegistManager;
 
@@ -42,9 +43,9 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		itemInfo.add(request.getParameter("item_price"));
 		itemInfo.add(request.getParameter("item_stock"));
 
-		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
+		ItemValidator itemValidator = new ItemValidator();
 
-		List<String> errors = itemInfoRegistManager.validator(itemInfo);
+		List<String> errors = itemValidator.validator(itemInfo);
 		request.setAttribute("errors", errors);
 
 		if(errors.isEmpty()){
@@ -58,6 +59,8 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		int itemPrice = Integer.parseInt(itemPriceString);
 		int itemStock = Integer.parseInt(itemStockString);
 
+
+		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
 		int itemId = itemInfoRegistManager.insertItem(itemName, itemPrice, itemStock);
 
 		//次に、いつ誰が何をいくつ登録・発注したかを記録する。
