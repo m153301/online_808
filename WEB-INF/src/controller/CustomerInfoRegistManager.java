@@ -2,6 +2,7 @@ package controller;
 
 import beans.Creditcard;
 import beans.Customer;
+import beans.User;
 import dao.CreditcardDAO;
 import dao.CustomerDAO;
 import dao.UserDAO;
@@ -17,12 +18,21 @@ public class CustomerInfoRegistManager {
 		return count;
 	}
 
-	public void registCustomerInfo(Customer customer, Creditcard creditcard) {
-		//まずはcustomerテーブルにinsertする
+	public void registCustomerInfo(User user, Customer customer, Creditcard creditcard) {
+		//userテーブルにinsertする
+		insertUser(user);
+		//customerテーブルにinsertする
 		insertCustomer(customer);
-		//つぎにcreditcardテーブルにinsertする
+		//reditcardテーブルにinsertする
 		insertCreditcard(creditcard);
 		
+		
+	}
+
+	private void insertUser(User user) {
+		UserDAO userDAO = new UserDAO();
+		
+		userDAO.insertUser(user);
 		
 	}
 

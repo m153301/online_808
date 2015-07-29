@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import beans.Creditcard;
 import beans.Customer;
+import beans.User;
 import controller.CustomerInfoRegistManager;
 import utility.PasswordEncryption;
 
@@ -37,6 +38,9 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			
 			CustomerInfoRegistManager customerInfoRegistManager = new CustomerInfoRegistManager();
 			
+			//userオブジェクトの作成
+			User user = new User(userId, password, customerName, null);
+			
 			//customerオブジェクトの作成
 			Customer customer = new Customer(userId, telNumber, creditTypeId);
 			
@@ -49,7 +53,7 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			if(check == 0){
 				
 				//顧客情報を登録
-				customerInfoRegistManager.registCustomerInfo(customer, creditcard);
+				customerInfoRegistManager.registCustomerInfo(user, customer, creditcard);
 				//完了画面へ
 				response.sendRedirect(response.encodeRedirectURL("./CustomerInfoRegistDone.jsp"));
 				
@@ -57,7 +61,7 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			
 			else{
 				request.setAttribute("error", "そのidはすでに登録があります．");
-				getServletContext().getRequestDispatcher("/jsp/customer/CustomerInfoRegist.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/jsp/common/CustomerInfoRegist.jsp").forward(request, response);
 			}
 			
 			

@@ -50,7 +50,7 @@ public class UserDAO extends DriverAccessor{
 		Connection con = null;
 		con = createConnection();
 		try{
-			String sql = "select count(1) user where user_id = (?);";
+			String sql = "select count(1) from user where user_id = (?);";
 			
 			//PreparedStatementの利用
 			PreparedStatement stmt = con.prepareStatement(sql);
@@ -75,5 +75,30 @@ public class UserDAO extends DriverAccessor{
 			
 		}
 		
+	}
+
+	public void insertUser(User user) {
+		// TODO Auto-generated method stub
+		Connection con = null;
+		con = createConnection();
+		
+		try{
+			String sql = "insert into user values (?,?,?,?);";
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			
+			stmt.setString(1, user.getUserId());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getUserName());
+			stmt.setString(4, "customer");
+			
+			stmt.executeUpdate();
+			stmt.close();
+			con = null;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			
+		}
 	}
 }
