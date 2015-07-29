@@ -44,9 +44,9 @@ public class ItemInfoRegistManager {
 		String itemPriceError = itemValidator.validateItemPrice(itemPrice);
 		String itemStockError = itemValidator.validateItemStock(itemStock);
 
-		if( itemNameError != null ) errors.add(itemValidator.validateItemName(itemName));
-		if( itemPriceError != null ) errors.add(itemValidator.validateItemPrice(itemPrice));
-		if( itemStockError != null ) errors.add(itemValidator.validateItemStock(itemStock));
+		if( itemNameError != null ) errors.add(itemNameError);
+		if( itemPriceError != null ) errors.add(itemPriceError);
+		if( itemStockError != null ) errors.add(itemStockError);
 
 		return errors;
 	}
