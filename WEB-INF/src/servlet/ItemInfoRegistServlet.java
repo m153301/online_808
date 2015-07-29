@@ -6,7 +6,6 @@ package servlet;
 /*****************************************************************************/
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,26 +35,20 @@ public class ItemInfoRegistServlet extends HttpServlet{
 
 		request.setCharacterEncoding("UTF-8");
 
-		List<String> itemInfo = new ArrayList<String>();
-
-		itemInfo.add(request.getParameter("item_name"));
-		itemInfo.add(request.getParameter("item_price"));
-		itemInfo.add(request.getParameter("item_stock"));
-
-		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
-
-		//不正な値が入っていないかチェック
-		List<String> errors = itemInfoRegistManager.validator(itemInfo);
-		request.setAttribute("errors", errors);
-
-		//エラーが無かったら正規の処理へ
-		if(errors.isEmpty()){
-
 		//まず商品をItemテーブルに格納。最初は発注した数が在庫になる。
 		//item_idを返すようにする
 		String itemName = StringEscapeUtils.escapeHtml4(request.getParameter("item_name"));
 		String itemPriceString = StringEscapeUtils.escapeHtml4(request.getParameter("item_price"));
 		String itemStockString = StringEscapeUtils.escapeHtml4(request.getParameter("item_stock"));
+
+		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
+
+		//不正な値が入っていないかチェック
+		List<String> errors = itemInfoRegistManager.validator(itemName, itemPriceString, itemStockString);
+		request.setAttribute("errors", errors);
+
+		//エラーが無かったら正規の処理へ
+		if(errors.isEmpty()){
 
 		int itemPrice = Integer.parseInt(itemPriceString);
 		int itemStock = Integer.parseInt(itemStockString);

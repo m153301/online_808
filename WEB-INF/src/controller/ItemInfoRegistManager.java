@@ -35,14 +35,18 @@ public class ItemInfoRegistManager {
 
 
 	//入力した値のチェック。不正な値だったらエラーを返す
-	public List<String> validator(List<String> itemInfo) {
+	public List<String> validator(String itemName, String itemPrice, String itemStock) {
 
 		List<String> errors = new ArrayList<String>();
 		ItemValidator itemValidator = new ItemValidator();
 
-		errors.add(itemValidator.validateItemName(itemInfo.get(0)));
-		errors.add(itemValidator.validateItemPrice(itemInfo.get(1)));
-		errors.add(itemValidator.validateItemStock(itemInfo.get(2)));
+		String itemNameError = itemValidator.validateItemName(itemName);
+		String itemPriceError = itemValidator.validateItemPrice(itemPrice);
+		String itemStockError = itemValidator.validateItemStock(itemStock);
+
+		if( itemNameError != null ) errors.add(itemValidator.validateItemName(itemName));
+		if( itemPriceError != null ) errors.add(itemValidator.validateItemPrice(itemPrice));
+		if( itemStockError != null ) errors.add(itemValidator.validateItemStock(itemStock));
 
 		return errors;
 	}
