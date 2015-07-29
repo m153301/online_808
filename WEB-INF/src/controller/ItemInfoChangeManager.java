@@ -6,7 +6,7 @@ import java.util.List;
 import validator.ItemValidator;
 
 public class ItemInfoChangeManager {
-	
+
 	public List<String> validator(String itemName, String itemPrice){
 		ItemValidator itemValidator = new ItemValidator();
 		List<String> errors = new ArrayList<String>();
@@ -16,7 +16,9 @@ public class ItemInfoChangeManager {
 
 		if(itemNameError != null ) errors.add(itemValidator.validateItemName(itemName));
 		if(itemPriceError != null ) errors.add(itemValidator.validateItemName(itemName));
-		
+		errors.add(itemValidator.validateItemName(itemName));
+		errors.add(itemValidator.validateItemPrice(itemPrice));
+
 		return errors;
 	}
 
