@@ -1,5 +1,12 @@
 package controller;
 
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import validator.UserValidator;
 import beans.Creditcard;
 import beans.Customer;
 import beans.User;
@@ -49,5 +56,22 @@ public class CustomerInfoRegistManager {
 		customerDAO.insertCustomer(customer);
 		
 	}
+
+	//例外の重複チェック
+	public List<String> validator(User user, Customer customer,
+			Creditcard creditcard) {
+		// TODO Auto-generated method stub
+		List<String> errors = new ArrayList<String>();
+		UserValidator userValidator = new UserValidator();
+		
+		String userIdError = userValidator.validateUserId(user.getUserId());
+		String userPasswordError = userValidator.validateUserPassword(user.getPassword());
+		String userNameError = userValidator.validateUserName(user.getUserName());
+		return null;
+	}
+	
+	
+	
+	
 
 }

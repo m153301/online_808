@@ -1,6 +1,8 @@
 package servlet;
 
+
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,6 +48,9 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			
 			//creditcardオブジェクトの作成
 			Creditcard creditcard = new Creditcard(0, creditTypeId,creditcardNumber);
+			
+			//不正な値が入っていないかチェック
+//			List<String> errors = customerInfoRegistManager.validator(user,customer,creditcard);
 			
 			//顧客情報の重複のチェック
 			int check = customerInfoRegistManager.selectCountCustomerByUserId(userId);
