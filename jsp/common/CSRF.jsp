@@ -4,6 +4,6 @@
 <title>不正なリクエスト</title>
 </head>
 <body>
-<h1><font color="#a40">不正なリクエストです！</font></h1>
+<h1><font color="#f00">不正なリクエストです！</font></h1>
 </body>
 </html>

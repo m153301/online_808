@@ -25,9 +25,10 @@ public class ItemInfoChangeCheckServlet extends HttpServlet{
 
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
-		String token = session.getId();
+		String token = request.getParameter("token");
 
-		if(token == null || !token.equals(request.getParameter("token"))){
+		if(token == null || !token.equals(session.getId())){
+
 			getServletContext().getRequestDispatcher("/jsp/common/CSRF.jsp").forward(request, response);
 		}
 		else {
