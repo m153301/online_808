@@ -9,7 +9,7 @@
 	<br>
 	<br>
 	
-		<form action="./ItemInfoChange.jsp" method="post">
+		<form action="./ItemInfoChangeCheckServlet" method="post">
 		<table style="text-align: left; width: 490px; margin-left: auto; margin-right: auto; height: 540px;" border="1" cellpadding="2" cellspacing="2">
 			<tbody>
 				<tr>
@@ -22,6 +22,12 @@
 					<td style="vertical-align: middle; width: 150px; text-align: center;">在庫</td>
 				</tr>
 				<%
+					List<String> errors = (List<String>)request.getAttribute("errors");
+					if(errors != null){
+						out.println("<font color='#f00'>");
+						for(String error : errors) out.println(error + "<br>");
+						out.println("</font>");
+					}
 					List<Item> items = (List<Item>)request.getAttribute("items");
 					HttpSession hs = request.getSession();
 					hs.setAttribute("items", items);

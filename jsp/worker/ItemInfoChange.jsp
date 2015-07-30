@@ -13,6 +13,13 @@
 	<%
 		request.setCharacterEncoding("UTF-8");
 		HttpSession hs = request.getSession();
+		List<String> errors = (List<String>)request.getAttribute("errors");
+			if(errors != null){
+			out.println("<font color='#f00'>");
+			for(String error : errors) out.println(error + "<br>");
+			out.println("</font>");
+		}
+
 		List<Item> items = (List<Item>)hs.getAttribute("items");
 	    Item changedItem = null;
 		for( Item item : items ){
