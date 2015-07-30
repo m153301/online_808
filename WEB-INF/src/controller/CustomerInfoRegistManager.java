@@ -18,11 +18,11 @@ public class CustomerInfoRegistManager {
 
 
 	//user_idの重複のチェック
-	public int selectCountCustomerByUserId(String userId) {
+	public int selectCountUserByUserId(String userId) {
 		UserDAO userDAO = new UserDAO();
 		
-		int count = userDAO.selectCountCustomerByUserId(userId);
-		return count;
+		int countId = userDAO.selectCountCustomerByUserId(userId);
+		return countId;
 	}
 
 	public void registCustomerInfo(User user, Customer customer, Creditcard creditcard) {

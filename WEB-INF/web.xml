@@ -40,6 +40,15 @@
 		<servlet-name>CustomerInfoRegistServlet</servlet-name>
 		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
 
 </web-app>
 

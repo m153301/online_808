@@ -90,7 +90,7 @@ public class UserDAO extends DriverAccessor{
 			stmt.setString(1, user.getUserId());
 			stmt.setString(2, user.getPassword());
 			stmt.setString(3, user.getUserName());
-			stmt.setString(4, "customer");
+			stmt.setString(4, user.getRole());
 			
 			stmt.executeUpdate();
 			stmt.close();

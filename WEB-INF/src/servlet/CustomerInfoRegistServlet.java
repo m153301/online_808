@@ -41,7 +41,7 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			CustomerInfoRegistManager customerInfoRegistManager = new CustomerInfoRegistManager();
 			
 			//userオブジェクトの作成
-			User user = new User(userId, password, customerName, null);
+			User user = new User(userId, password, customerName, "customer");
 			
 			//customerオブジェクトの作成
 			Customer customer = new Customer(userId, telNumber, creditTypeId);
@@ -53,9 +53,9 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 //			List<String> errors = customerInfoRegistManager.validator(user,customer,creditcard);
 			
 			//顧客情報の重複のチェック
-			int check = customerInfoRegistManager.selectCountCustomerByUserId(userId);
+			int countId = customerInfoRegistManager.selectCountUserByUserId(userId);
 			
-			if(check == 0){
+			if(countId == 0){
 				
 				//顧客情報を登録
 				customerInfoRegistManager.registCustomerInfo(user, customer, creditcard);
