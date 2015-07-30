@@ -53,6 +53,7 @@
 		</tbody>
 	</table>
 	<input type="hidden" name="item_id" value="<%= changedItem.getItemId() %>"/>
+	<input type="hidden" name="token" value="<%= hs.getId() %>"/>
 	</form>
 </body>
 </html>

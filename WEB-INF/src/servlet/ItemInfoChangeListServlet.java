@@ -7,25 +7,26 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import beans.Item;
 import controller.ItemInfoChangeManager;
 
 
 public class ItemInfoChangeListServlet extends HttpServlet{
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-				doPost(request,response);
-		}
+		doPost(request,response);
+	}
 
-		public void doPost(HttpServletRequest request,HttpServletResponse response)
+	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-			
-			request.setCharacterEncoding("UTF-8");
-			ItemInfoChangeManager itemInfoChangeManager = new ItemInfoChangeManager();
-			List<Item> items = itemInfoChangeManager.selectItemAll();
-			request.setAttribute("items", items);
-			getServletContext().getRequestDispatcher("/jsp/worker/ItemInfoChangeList.jsp").forward(request, response);
 
-		}
+		request.setCharacterEncoding("UTF-8");
+		ItemInfoChangeManager itemInfoChangeManager = new ItemInfoChangeManager();
+		List<Item> items = itemInfoChangeManager.selectItemAll();
+		request.setAttribute("items", items);
+		getServletContext().getRequestDispatcher("/jsp/worker/ItemInfoChangeList.jsp").forward(request, response);
+	}
 }

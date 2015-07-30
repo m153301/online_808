@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -17,18 +18,24 @@ import controller.ItemInfoChangeManager;
 public class ItemInfoChangeServlet extends HttpServlet{
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-				doPost(request,response);
-		}
+		doPost(request,response);
+	}
 
-		public void doPost(HttpServletRequest request,HttpServletResponse response)
+	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-			
-			request.setCharacterEncoding("UTF-8");
-			
+
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(false);
+		String token = session.getId();
+
+		if(token == null || !token.equals(request.getParameter("token"))){
+			getServletContext().getRequestDispatcher("/jsp/common/CSRF.jsp").forward(request, response);
+		}
+		else{
 			String itemId = StringEscapeUtils.escapeHtml4(request.getParameter("item_id"));
 			String itemName = StringEscapeUtils.escapeHtml4(request.getParameter("item_name"));
 			String itemPrice = StringEscapeUtils.escapeHtml4(request.getParameter("item_price"));
-	
+
 			List<String> errors = new ArrayList<String>();
 			List<Item> items = new ArrayList<Item>();
 			ItemInfoChangeManager itemInfoChangeManager = new ItemInfoChangeManager();
@@ -44,6 +51,6 @@ public class ItemInfoChangeServlet extends HttpServlet{
 				itemInfoChangeManager.updateItemById(Integer.parseInt(itemId), itemName, Integer.parseInt(itemPrice));
 				getServletContext().getRequestDispatcher("/jsp/worker/ItemInfoChangeDone.jsp").forward(request, response);
 			}
-			
 		}
+	}
 }

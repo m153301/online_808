@@ -8,27 +8,36 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Item;
 import controller.ItemInfoChangeManager;
 
 public class ItemInfoChangeCheckServlet extends HttpServlet{
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-				doPost(request,response);
-		}
+		doPost(request,response);
+	}
 
-		public void doPost(HttpServletRequest request,HttpServletResponse response)
+	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
-			
-			request.setCharacterEncoding("UTF-8");
+
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(false);
+		String token = session.getId();
+
+		if(token == null || !token.equals(request.getParameter("token"))){
+			getServletContext().getRequestDispatcher("/jsp/common/CSRF.jsp").forward(request, response);
+		}
+		else {
 			String itemId = request.getParameter("item_id");
 			List<String> errors = new ArrayList<String>();
 			List<Item> items = new ArrayList<Item>();
 			ItemInfoChangeManager itemInfoChangeManager = new ItemInfoChangeManager();
 			items = itemInfoChangeManager.selectItemAll();
 			errors = itemInfoChangeManager.validateItemInfoChangeListForm(itemId);
+
 			request.setAttribute("errors", errors);
 			request.setAttribute("items", items);
 
@@ -38,6 +47,6 @@ public class ItemInfoChangeCheckServlet extends HttpServlet{
 			else{
 				getServletContext().getRequestDispatcher("/jsp/worker/ItemInfoChange.jsp").forward(request, response);
 			}
-
 		}
+	}
 }
