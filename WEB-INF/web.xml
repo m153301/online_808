@@ -27,7 +27,16 @@
 		<servlet-name>ItemInfoChangeServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoChangeServlet</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeCheckServlet</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>ItemInfoRegist</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
