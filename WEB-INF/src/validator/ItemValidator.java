@@ -8,8 +8,10 @@ public class ItemValidator {
 	private String errorItemNameTooLong = "商品名は" + Integer.toString(MAX_LENGTH_ITEM_NAME) + "以内でご入力下さい。";
 	private String errorItemPriceTooMuch = "単価は" + Integer.toString(MAX_DIGIT_ITEM_PRICE) + "桁以内でご入力下さい。";
 	private String errorItemPriceNotNum = "単価は半角数字でご入力下さい。";
+	private String errorItemPriceNotPositive = "単価は正数でご入力下さい。";
 	private String errorItemStockTooMuch = "在庫数は" + Integer.toString(MAX_DIGIT_ITEM_STOCK) + "桁以内でご入力下さい。";
 	private String errorItemStockNotNum = "在庫数は半角数字でご入力下さい。";
+	private String errorItemStockNotPositive = "在庫数は正数でご入力下さい。";
 	
 	public ItemValidator(){}
 	
@@ -22,6 +24,9 @@ public class ItemValidator {
 		if( !isNumber(itemPrice)){
 			return errorItemPriceNotNum;
 		}
+		else if(Integer.parseInt(itemPrice) < 0){
+			return errorItemPriceNotPositive;
+		}
 		else if(itemPrice.length() > MAX_DIGIT_ITEM_PRICE || itemPrice.length() < 0){
 			return errorItemPriceTooMuch;
 		}
@@ -31,6 +36,9 @@ public class ItemValidator {
 	public String validateItemStock(String itemStock){
 		if( !isNumber(itemStock)){
 			return errorItemStockTooMuch;
+		}
+		else if(Integer.parseInt(itemStock) < 0){
+			return errorItemStockNotPositive;
 		}
 		else if(itemStock.length() > MAX_DIGIT_ITEM_STOCK || itemStock.length() < 0){
 			return errorItemStockNotNum;
