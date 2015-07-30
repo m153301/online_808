@@ -32,5 +32,18 @@ public class ItemInfoChangeManager {
 
 		return errors;
 	}
+	
+	public List<String> validateItemInfoChangeForm(String itemName, String itemPrice){
+		ItemValidator itemValidator = new ItemValidator();
+		List<String> errors = new ArrayList<String>();
+
+		String itemNameError = itemValidator.validateItemName(itemName);
+		String itemPriceError = itemValidator.validateItemPrice(itemPrice);
+
+		if(itemNameError != null ) errors.add(itemNameError);
+		if(itemPriceError != null ) errors.add(itemPriceError);
+
+		return errors;	
+	}
 
 }
