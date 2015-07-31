@@ -12,15 +12,14 @@
 	<br>
 	<%
 		request.setCharacterEncoding("UTF-8");
-		HttpSession hs = request.getSession();
 		List<String> errors = (List<String>)request.getAttribute("errors");
-			if(errors != null){
+		if(errors != null){
 			out.println("<font color='#f00'>");
 			for(String error : errors) out.println(error + "<br>");
 			out.println("</font>");
 		}
 
-		List<Item> items = (List<Item>)hs.getAttribute("items");
+		List<Item> items = (List<Item>)request.getAttribute("items");
 	    Item changedItem = null;
 		for( Item item : items ){
 			if( item.getItemId() == Integer.parseInt(request.getParameter("item_id")) ){
@@ -53,7 +52,7 @@
 		</tbody>
 	</table>
 	<input type="hidden" name="item_id" value="<%= changedItem.getItemId() %>"/>
-	<input type="hidden" name="token" value="<%= hs.getId() %>"/>
+	<input type="hidden" name="token" value="<%= request.getSession().getId() %>"/>
 	</form>
 </body>
 </html>

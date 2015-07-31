@@ -28,9 +28,8 @@
 						for(String error : errors) out.println(error + "<br>");
 						out.println("</font>");
 					}
+
 					List<Item> items = (List<Item>)request.getAttribute("items");
-					HttpSession hs = request.getSession();
-					hs.setAttribute("items", items);
 					for( Item item : items )
 					{
 						out.println("<tr>");
@@ -50,7 +49,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<input type="hidden" name="token" value="<%= hs.getId() %>"/>
+		<input type="hidden" name="token" value="<%= request.getSession().getId() %>"/>
 	</form>
 </body>
 </html>
