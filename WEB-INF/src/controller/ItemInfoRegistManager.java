@@ -35,7 +35,7 @@ public class ItemInfoRegistManager {
 
 
 	//入力した値のチェック。不正な値だったらエラーを返す
-	public List<String> validator(String itemName, String itemPrice, String itemStock) {
+	public List<String> validateItemInfoRegistForm(String itemName, String itemPrice, String itemStock) {
 
 		List<String> errors = new ArrayList<String>();
 		ItemValidator itemValidator = new ItemValidator();
