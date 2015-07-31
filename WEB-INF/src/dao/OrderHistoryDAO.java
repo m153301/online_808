@@ -53,34 +53,34 @@ public class OrderHistoryDAO extends DriverAccessor{
 
 
 	//発注履歴を検索する
-	public static ArrayList<String> selectOrderHistory(){
+	public ArrayList<String> selectOrderHistory(){
 
 		Connection con = null;
 		con = createConnection();
 
 		try{
 
-			String sql="SELECT ordered.order_id, user.user_name, item.item_name, ordered.order_date, ordered.order_quantity FROM user INNER JOIN (item INNER JOIN ordered ON item.item_id = ordered.item_id) ON ordered.user_id = user.user_id ORDER BY ordered.order_id DESC;";
+			String sql="SELECT * from order_history LEFT JOIN item using  (item_id) LEFT JOIN user using (user_id);";
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
 
-			ArrayList<String> list = new ArrayList<String>();
+			ArrayList<String> orderHistoryList = new ArrayList<String>();
 
 			while(rs.next())
 		    {
-			list.add(rs.getString("ordered.order_id"));
-			list.add(rs.getString("user.user_name"));
-			list.add(rs.getString("item.item_name"));
-			list.add(rs.getString("ordered.order_date"));
-			list.add(rs.getString("ordered.order_quantity"));
+			orderHistoryList.add(rs.getString("order_history.order_id"));
+			orderHistoryList.add(rs.getString("user.user_name"));
+			orderHistoryList.add(rs.getString("item.item_name"));
+			orderHistoryList.add(rs.getString("order_history.order_date"));
+			orderHistoryList.add(rs.getString("order_history.order_quantity"));
 			}
 
 			stmt.close();
 			rs.close();
 			con = null;
 
-			return list;
+			return orderHistoryList;
 
 		}catch(SQLException e){
 

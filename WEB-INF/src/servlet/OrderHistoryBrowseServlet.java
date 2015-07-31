@@ -27,14 +27,13 @@ public class OrderHistoryBrowseServlet extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 												throws ServletException, IOException{
 
-
 		request.setCharacterEncoding("UTF-8");
 
 		OrderHistoryBrowseManager selectOrderHistory = new OrderHistoryBrowseManager();
 		ArrayList<String> orderHistoryList = selectOrderHistory.selectOrderHistory();
 
 		request.setAttribute("OrderHistoryList", orderHistoryList);
-		getServletContext().getRequestDispatcher("/jsp/worker/OrderedBrowse.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/jsp/worker/OrderHistoryBrowse.jsp").forward(request, response);
 	}
 
 }

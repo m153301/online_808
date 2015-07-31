@@ -27,7 +27,7 @@
 		<br>
 		☆発注履歴☆<br>
 
-		<form method = "post" action="../worker/OrderedBrowseServlet">
+		<form method = "post" action="../worker/OrderHistoryBrowseServlet">
 		<input type="submit" value="発注履歴確認">
 		</form>
 

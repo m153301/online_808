@@ -15,8 +15,8 @@ public class OrderHistoryBrowseManager {
 
 		OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
 		//発注履歴を検索してリストで取ってくる
-		ArrayList<String> orderedlist = OrderHistoryDAO.selectOrderHistory();
+		ArrayList<String> orderHistoryList = orderHistoryDAO.selectOrderHistory();
 
-		return orderedlist;
+		return orderHistoryList;
 	}
 }
