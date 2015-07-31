@@ -4,5 +4,61 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
+  <servlet>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<servlet-class>servlet.ItemInfoRegistServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ItemInfoChangeListServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeListServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeListServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemInfoChangeServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeCheckServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/jsp/common/LoginServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LogOutServlet</servlet-name>
+		<servlet-class>servlet.LogOutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogOutServlet</servlet-name>
+		<url-pattern>/jsp/common/LogOutServlet</url-pattern>
+	</servlet-mapping>
+
 </web-app>
 
