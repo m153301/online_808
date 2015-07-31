@@ -44,7 +44,7 @@ public class ItemInfoRegistServlet extends HttpServlet{
 		ItemInfoRegistManager itemInfoRegistManager = new ItemInfoRegistManager();
 
 		//不正な値が入っていないかチェック
-		List<String> errors = itemInfoRegistManager.validator(itemName, itemPriceString, itemStockString);
+		List<String> errors = itemInfoRegistManager.validateItemInfoRegistForm(itemName, itemPriceString, itemStockString);
 		request.setAttribute("errors", errors);
 
 		//エラーが無かったら正規の処理へ
