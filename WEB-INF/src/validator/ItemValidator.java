@@ -52,7 +52,6 @@ public class ItemValidator {
 		else if(Integer.parseInt(itemStock) < 0){
 			return ERROR_ITEM_STOCK_NEGATIVE_NUM;
 		}
-		
 		return null;
 	}
 	
