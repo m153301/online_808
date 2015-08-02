@@ -28,16 +28,11 @@ public class SaleBrowseServlet extends HttpServlet{
 
 		request.setCharacterEncoding("UTF-8");
 
+		//購入履歴を検索する
 		SaleBrowseManager saleBrowseManager = new SaleBrowseManager();
 		ArrayList<String> saleHistoryList = saleBrowseManager.selectPurchaseHistory();
-
-		/*
-		for(int i=0; i<saleHistoryList.size(); i++){
-			System.out.println(saleHistoryList.get(i));
-		}*/
 
 		request.setAttribute("SaleHistoryList", saleHistoryList);
 		getServletContext().getRequestDispatcher("/jsp/worker/SaleHistoryBrowse.jsp").forward(request, response);
 	}
-
 }

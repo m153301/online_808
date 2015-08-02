@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
 <%@ page import="java.text.ParseException" %>
 
 <%
@@ -23,9 +22,10 @@
 	<br>
 
 <%
-int i = 0, total, subTotal, price, quantity;
+int i = 0, total, subTotal; //ある日の総売上金額、ある購入の小計
+int price, quantity;
 int length = saleHistoryList.size();
-int date = 0;
+int date = 0;//日付をまとめるための変数
 
 while(i < length-1 ){
 	out.println("<table style='text-align: center; width: 600px; height: 300px;' border='1' cellpadding='2' cellspacing='2'>");
@@ -44,7 +44,7 @@ while(i < length-1 ){
 	subTotal = 0;
 	date = i;
 
-
+	//同じ日付のものはまとめて印字
 	while(saleHistoryList.get(date).equals(saleHistoryList.get(i))){
 
 		out.println("<tr>");
@@ -87,8 +87,3 @@ while(i < length-1 ){
 
 
 </html>
-
-
-
-
-
