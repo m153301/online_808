@@ -15,7 +15,7 @@ import utility.DriverAccessor;
 public class PurchaseHistoryDAO extends DriverAccessor{
 
 	//売上を出すために商品名、購入日付、購入数、値段を検索する
-	public ArrayList<String> selectPurchaseHistoryByAll(){
+	public ArrayList<String> selectPurchaseHistoryAll(){
 
 		Connection con = null;
 		con = createConnection();
