@@ -7,9 +7,10 @@
 </head>
 <body>
 <%
-	User user = (User)session.getAttribute("worker");
-	out.println(user.getUserName() + "さん ようこそ！<br>");
+//	User user = (User)session.getAttribute("worker");
+//	out.println(user.getUserName() + "さん ようこそ！<br>");
 %>
+
 <br>
 	<div class="title">
 		☆商品☆<br>
@@ -26,7 +27,7 @@
 		<br>
 		☆発注履歴☆<br>
 
-		<form method = "post" action="../worker/OrderedBrowseServlet">
+		<form method = "post" action="../worker/OrderHistoryBrowseServlet">
 		<input type="submit" value="発注履歴確認">
 		</form>
 

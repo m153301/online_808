@@ -12,8 +12,14 @@
 	<br>
 	<%
 		request.setCharacterEncoding("UTF-8");
-		HttpSession hs = request.getSession();
-		List<Item> items = (List<Item>)hs.getAttribute("items");
+		List<String> errors = (List<String>)request.getAttribute("errors");
+		if(errors != null){
+			out.println("<font color='#f00'>");
+			for(String error : errors) out.println(error + "<br>");
+			out.println("</font>");
+		}
+
+		List<Item> items = (List<Item>)request.getAttribute("items");
 	    Item changedItem = null;
 		for( Item item : items ){
 			if( item.getItemId() == Integer.parseInt(request.getParameter("item_id")) ){
@@ -39,10 +45,6 @@
 				<td style="text-align: center; width: 180px; height: 60px;"><input name="item_price" value="<%= changedItem.getItemPrice() %>" type="text"></td>
 			</tr>
 			<tr>
-				<td style="text-align: center; width: 180px; height: 60px;">在庫</td>
-				<td style="text-align: center; width: 180px; height: 60px;"><input name="item_stock" value="<%= changedItem.getItemStock() %>" type="text"></td>
-			</tr>
-			<tr>
 				<td colspan="2" rowspan="1" style="text-align: center; width: 180px; height: 60px;">
 					<input type="submit" value="変更" />
 				</td>
@@ -50,6 +52,7 @@
 		</tbody>
 	</table>
 	<input type="hidden" name="item_id" value="<%= changedItem.getItemId() %>"/>
+	<input type="hidden" name="token" value="<%= request.getSession().getId() %>"/>
 	</form>
 </body>
 </html>
