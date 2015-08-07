@@ -69,7 +69,6 @@
 		<url-pattern>/jsp/worker/OrderHistoryBrowseServlet</url-pattern>
 	</servlet-mapping>
 
-
 	<servlet>
 		<servlet-name>SaleBrowseServlet</servlet-name>
 		<servlet-class>servlet.SaleBrowseServlet</servlet-class>
@@ -77,6 +76,24 @@
 	<servlet-mapping>
 		<servlet-name>SaleBrowseServlet</servlet-name>
 		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ItemInfoGetServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoGetServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoGetServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoGetServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RecommendRegistServlet</servlet-name>
+		<servlet-class>servlet.RecommendRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RecommendRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
 	</servlet-mapping>
 
 </web-app>

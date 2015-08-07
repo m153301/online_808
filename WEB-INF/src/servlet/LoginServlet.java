@@ -15,9 +15,9 @@ import utility.PasswordEncryption;
 import beans.IpHistory;
 import beans.User;
 import controller.LoginManager;
-import controller.RecommendGetManager;
-import beans.Item;
+import controller.RecommendManager;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LoginServlet extends HttpServlet{
 	
@@ -80,11 +80,11 @@ public class LoginServlet extends HttpServlet{
 					//user.roleがcustomerの場合，customerというsessionを保持
 					session.setAttribute("customer",user);
 					
-//					おすすめ情報をCustomerTopに渡す
-//					ArrayList<Item> recommendedItemList = new ArrayList<Item>();
-//					RecommendGetManager recommendGetManager = new RecommendGetManager();
-//					recommendedItemList = recommendGetManager.getRecommendedItem();
-//					request.setAttribute("RecommendedItemList", recommendedItemList);
+					//おすすめ情報をCustomerTopに渡す
+					List<String> itemNameList = new ArrayList<String>();
+					RecommendManager recommendManager = new RecommendManager();
+					itemNameList = recommendManager.getRecommendedItemName();
+					request.setAttribute("RecommendedItemNameList", itemNameList);
 
 					getServletContext().getRequestDispatcher("/jsp/customer/CustomerTop.jsp").forward(request, response);
 				}
