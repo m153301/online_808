@@ -78,10 +78,7 @@ public class LoginManager{
 		
 		//おすすめテーブルから一覧を取得
 		RecommendDAO recommendDAO = new RecommendDAO();
-		this.connection = recommendDAO.createConnection();
-		recommendList = recommendDAO.selectRecommendAll(connection);
-		recommendDAO.closeConnection(this.connection);
-		this.connection = null;
+		recommendList = recommendDAO.selectRecommendAll();
 		
 		//Recommendオブジェクトから商品IDを取り出す
 		List<Integer> itemIdList = new ArrayList<Integer>();
@@ -92,7 +89,7 @@ public class LoginManager{
 		//おすすめリストから、商品リストを取得
 		ItemDAO itemDAO = new ItemDAO();
 		this.connection = itemDAO.createConnection();
-		itemNameList = itemDAO.selectItemNameByItemId(itemIdList, connection);
+		itemNameList = itemDAO.selectItemNameByItemId(itemIdList);
 		this.connection = null;
 		
 		return itemNameList;

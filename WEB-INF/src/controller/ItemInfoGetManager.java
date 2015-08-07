@@ -1,7 +1,7 @@
 package controller;
 
-import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.ItemDAO;
 import beans.Item;
@@ -9,22 +9,14 @@ import beans.Item;
 
 public class ItemInfoGetManager {
 	
-	private Connection connection;
-	
-	public ArrayList<Item> getItemInfo(){
-		ArrayList<Item> itemList = new ArrayList<Item>();
+	public List<Item> getItemInfo(){
+		
+		List<Item> items = new ArrayList<Item>();
 		
 		ItemDAO itemDAO = new ItemDAO();
+		items = itemDAO.selectItemAll();
 		
-		this.connection = itemDAO.createConnection();
-		
-		itemList = itemDAO.selectItemAll(connection);
-		
-		itemDAO.closeConnection(this.connection);
-		
-		this.connection = null;
-		
-		return itemList;
+		return items;
 	}
   
 }

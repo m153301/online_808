@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Item;
-import beans.Recommend;
 
 
 public class ItemDAO extends DriverAccessor{
@@ -127,38 +126,8 @@ public class ItemDAO extends DriverAccessor{
 		return autoIncKey;
 	}
 	
-	//商品一覧を取得する
-	public ArrayList<Item> selectItemAll(Connection connection){
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		try{
-			String sql = "select * from item;";
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
-			while( rs.next() )
-			{
-				
-				Item item = new Item( 
-						rs.getInt( "item_id" ), 
-						rs.getString( "item_name" ),
-						rs.getInt( "item_price"  ), 
-						rs.getInt( "item_stock"  ) );
-				itemList.add( item );
-			}
-			
-			stmt.close();
-			rs.close();
-		}
-		catch(SQLException e){
-				e.printStackTrace();
-		}
-		finally {
-			
-		}
-		return itemList;
-	}
-	
 	//商品IDのリストから商品名のリストを取得する
-	public List<String> selectItemNameByItemId(List<Integer> itemIdList, Connection connection){
+	public List<String> selectItemNameByItemId(List<Integer> itemIdList){
 		
 		List<String> itemNameList = new ArrayList<String>();
 		
@@ -167,7 +136,11 @@ public class ItemDAO extends DriverAccessor{
 				int itemId = itemIdList.get(i);
 				
 				String sql = "select item_name from item where item_id = " + itemId + ";";
-				Statement stmt = connection.createStatement();
+				
+				Connection con = null;
+				con = createConnection();
+				
+				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);
 				
 				rs.next();
@@ -177,6 +150,7 @@ public class ItemDAO extends DriverAccessor{
 				
 				stmt.close();
 				rs.close();
+				con = null;
 			}
 			catch(SQLException e){
 				e.printStackTrace();
