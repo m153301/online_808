@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
@@ -21,9 +20,9 @@ public class RecommendDAO extends DriverAccessor{
 
 
 	//おすすめを新たに登録する
-	public int insertRecommend( int itemId, String userId, Date date ){
+	public String insertRecommend( int itemId, String userId, Date date ){
 		
-		int x;
+		String recommendRegistResult;
 		try{
 			//引数のDateはjava.util.Dateなのでjava.sql.dateに変換
 			Calendar cal = Calendar.getInstance();
@@ -50,30 +49,30 @@ public class RecommendDAO extends DriverAccessor{
 			stmt.close();
 			con = null;
 			
-			x = 1;
+			recommendRegistResult = "登録が完了しました！";
 		}
 		catch(SQLException e){
 			
 			if( e.toString().contains("Duplicate entry") && e.toString().contains("for key 'item_id") )
 			{
-				x = 0;
+				recommendRegistResult = "その商品はすでに別の店員によって登録されていますm(_ _)m";
 			}
 			else
 			{
 				e.printStackTrace();
-				x = -1;
+				recommendRegistResult = "おすすめ登録に失敗しましたm(_ _)m";
 			}
 		}
 		finally {
 
 		}
-		return x;
+		return recommendRegistResult;
 	}
 	
 	//おすすめを上書き登録する
-	public int updateRecommendByUserId( int itemId, String userId, Date date ){
+	public String updateRecommendByUserId( int itemId, String userId, Date date ){
 		
-		int x;
+		String recommendRegistResult;
 		try{
 			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
 			Calendar cal = Calendar.getInstance();
@@ -101,25 +100,25 @@ public class RecommendDAO extends DriverAccessor{
 			stmt.close();
 			con = null;
 			
-			x = 1;
+			recommendRegistResult = "登録が完了しました！";
 		}
 		catch(SQLException e){
 			
 			if( e.toString().contains("Duplicate entry") && e.toString().contains("for key 'item_id") )
 			{
-				x = 0;
+				recommendRegistResult = "その商品はすでに別の店員によって登録されていますm(_ _)m";
 			}
 			else
 			{
 				e.printStackTrace();
-				x = -1;
+				recommendRegistResult = "おすすめ登録に失敗しましたm(_ _)m";
 			}
 			
 		}
 		finally {
 			
 		}
-		return x;
+		return recommendRegistResult;
 	}
 	
 	//UserIdからおすすめを取得する
@@ -132,8 +131,8 @@ public class RecommendDAO extends DriverAccessor{
 			Connection con = null;
 			con = createConnection();
 			
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
 			
 			if( rs.next() )
 			{
@@ -172,7 +171,7 @@ public class RecommendDAO extends DriverAccessor{
 	}
 	
 	//おすすめされた商品名一覧を取得する
-	public List<String> selectRecommendAll(){
+	public List<String> selectRecommendItemName(){
 		
 		List<String> itemNameList = new ArrayList<String>();
 		
@@ -182,8 +181,8 @@ public class RecommendDAO extends DriverAccessor{
 			Connection con = null;
 			con = createConnection();
 			
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
 			
 			while( rs.next() )
 			{

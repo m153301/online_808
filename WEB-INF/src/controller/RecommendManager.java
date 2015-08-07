@@ -16,28 +16,28 @@ import beans.Recommend;
 public class RecommendManager {
 
 	//おすすめをrecommendテーブルに格納する
-	public int insertRecommend(Recommend recommend){
+	public String insertRecommend(Recommend recommend){
 		
-		int x;
+		String recommendRegistResult;
 		
 		//現在の店員がすでにおすすめを登録しているか確認する（結果はresultに格納）
-		Recommend result = new Recommend();
+		Recommend existingRecommend = new Recommend();
 		RecommendDAO recommendDAO = new RecommendDAO();
-		result = recommendDAO.selectRecommendByUserId(recommend.getUserId());
+		existingRecommend = recommendDAO.selectRecommendByUserId(recommend.getUserId());
 		
 		//すでに当該店員によっておすすめが登録されていれば、更新する。されていなければ新規に登録する
-		if(result != null)
+		if(existingRecommend != null)
 		{
 			System.out.println("Update.");
-			x = recommendDAO.updateRecommendByUserId( recommend.getItemId(), recommend.getUserId(), recommend.getDate() );
+			recommendRegistResult = recommendDAO.updateRecommendByUserId( recommend.getItemId(), recommend.getUserId(), recommend.getDate() );
 		}
 		else
 		{
 			System.out.println("Insert.");
-			x = recommendDAO.insertRecommend( recommend.getItemId(), recommend.getUserId(), recommend.getDate() );
+			recommendRegistResult = recommendDAO.insertRecommend( recommend.getItemId(), recommend.getUserId(), recommend.getDate() );
 		}
 		
-		return x;
+		return recommendRegistResult;
 	}
 	
 	//おすすめをrecommendテーブルから取得し、おすすめされている商品一覧を返す
@@ -47,7 +47,7 @@ public class RecommendManager {
 		
 		//おすすめテーブルから一覧を取得
 		RecommendDAO recommendDAO = new RecommendDAO();
-		itemNameList = recommendDAO.selectRecommendAll();
+		itemNameList = recommendDAO.selectRecommendItemName();
 		
 		return itemNameList;
 	}
