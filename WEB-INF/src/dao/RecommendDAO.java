@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import utility.DriverAccessor;
 import beans.Recommend;
@@ -19,13 +20,12 @@ public class RecommendDAO extends DriverAccessor{
 
 
 	//おすすめを新たに登録する
-	public void insertRecommend(Recommend recommend){
+	public void insertRecommend( int itemId, String userId, Date date ){
 		try{
 
-			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
-			java.util.Date d = recommend.getDate();
+			//引数のDateはjava.util.Dateなのでjava.sql.dateに変換
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(d);
+			cal.setTime(date);
 			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 0);
@@ -40,9 +40,9 @@ public class RecommendDAO extends DriverAccessor{
 
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setInt(1, recommend.getItemId());
-			stmt.setString(2, recommend.getUserId());
-			stmt.setDate(3, d2);
+			stmt.setInt( 1, itemId );
+			stmt.setString( 2, userId );
+			stmt.setDate( 3, d2 );
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -59,13 +59,12 @@ public class RecommendDAO extends DriverAccessor{
 	}
 	
 	//おすすめを上書き登録する
-	public void updateRecommendByUserId(Recommend recommend){
+	public void updateRecommendByUserId( int itemId, String userId, Date date ){
 		try{
 			
 			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
-			java.util.Date d = recommend.getDate();
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(d);
+			cal.setTime(date);
 			cal.set(Calendar.HOUR_OF_DAY, 0);
 			cal.set(Calendar.MINUTE, 0);
 			cal.set(Calendar.SECOND, 0);
@@ -75,15 +74,15 @@ public class RecommendDAO extends DriverAccessor{
 			//sql文の実行
 			String sql = 
 					"update recommend set item_id = ?, recommend_date = ? where user_id ='" + 
-					recommend.getUserId() + "';";
+					userId + "';";
 			
 			Connection con = null;
 			con = createConnection();
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
-			stmt.setInt(1, recommend.getItemId());
-			stmt.setDate(2, d2);
+			stmt.setInt( 1, itemId );
+			stmt.setDate( 2, d2 );
 			
 			stmt.executeUpdate();
 			stmt.close();

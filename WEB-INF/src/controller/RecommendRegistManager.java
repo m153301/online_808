@@ -22,10 +22,10 @@ public class RecommendRegistManager {
 		//すでに当該店員によっておすすめが登録されていれば、更新する。されていなければ新規に登録する
 		if(isAlreadyInserted)
 		{
-			recommendDAO.updateRecommendByUserId(recommend);
+			recommendDAO.updateRecommendByUserId( recommend.getItemId(), recommend.getUserId(), recommend.getDate() );
 		}
 		else{
-			recommendDAO.insertRecommend(recommend);
+			recommendDAO.insertRecommend( recommend.getItemId(), recommend.getUserId(), recommend.getDate() );
 		}
 	}
 }
