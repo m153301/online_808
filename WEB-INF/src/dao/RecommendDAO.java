@@ -19,7 +19,7 @@ public class RecommendDAO extends DriverAccessor{
 
 
 	//おすすめを新たに登録する
-	public void insertRecommend(Recommend recommend, Connection connection){
+	public void insertRecommend(Recommend recommend){
 		try{
 
 			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
@@ -34,16 +34,19 @@ public class RecommendDAO extends DriverAccessor{
 			
 			//sql文の実行
 			String sql = "insert into recommend values(?,?,?)";
+			
+			Connection con = null;
+			con = createConnection();
 
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.setInt(1, recommend.getItemId());
 			stmt.setString(2, recommend.getUserId());
 			stmt.setDate(3, d2);
 
 			stmt.executeUpdate();
-
 			stmt.close();
+			con = null;
 		}
 		catch(SQLException e){
 			
@@ -56,7 +59,7 @@ public class RecommendDAO extends DriverAccessor{
 	}
 	
 	//おすすめを上書き登録する
-	public void updateRecommendByUserId(Recommend recommend, Connection connection){
+	public void updateRecommendByUserId(Recommend recommend){
 		try{
 			
 			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
@@ -74,13 +77,17 @@ public class RecommendDAO extends DriverAccessor{
 					"update recommend set item_id = ?, recommend_date = ? where user_id ='" + 
 					recommend.getUserId() + "';";
 			
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			Connection con = null;
+			con = createConnection();
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			stmt.setInt(1, recommend.getItemId());
 			stmt.setDate(2, d2);
 			
 			stmt.executeUpdate();
 			stmt.close();
+			con = null;
 		}
 		catch(SQLException e){
 			
@@ -93,11 +100,15 @@ public class RecommendDAO extends DriverAccessor{
 	}
 	
 	//すでに当該店員がおすすめを登録していないか判定する
-	public boolean selectRecommendByUserId(String userId, Connection connection){
+	public boolean selectRecommendByUserId(String userId){
 		
 		try{
 			String sql = "select * from recommend where user_id='" + userId + "';";
-			Statement stmt = connection.createStatement();
+			
+			Connection con = null;
+			con = createConnection();
+			
+			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			rs.next();
@@ -110,6 +121,7 @@ public class RecommendDAO extends DriverAccessor{
 			
 			stmt.close();
 			rs.close();
+			con = null;
 		}
 		catch(SQLException e){
 			
@@ -123,13 +135,17 @@ public class RecommendDAO extends DriverAccessor{
 	}
 	
 	//おすすめ一覧を取得する
-	public ArrayList<Recommend> selectRecommendAll(Connection connection){
+	public ArrayList<Recommend> selectRecommendAll(){
 		
 		ArrayList<Recommend> recommendList = new ArrayList<Recommend>();
 		
 		try{
 			String sql = "select * from recommend;";
-			Statement stmt = connection.createStatement();
+			
+			Connection con = null;
+			con = createConnection();
+			
+			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while( rs.next() )
@@ -144,6 +160,7 @@ public class RecommendDAO extends DriverAccessor{
 
 			stmt.close();
 			rs.close();
+			con = null;
 		}
 		catch(SQLException e){
 			

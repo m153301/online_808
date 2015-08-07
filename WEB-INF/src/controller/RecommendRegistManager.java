@@ -16,12 +16,12 @@ public class RecommendRegistManager {
 	private Connection connection = null;
 
 	//おすすめをrecommendテーブルに格納する
-	public void setRecommend(Recommend recommend){
+	public void insertRecommend(Recommend recommend){
 		
 		RecommendDAO recommendDAO = new RecommendDAO();
 		
 		this.connection = recommendDAO.createConnection();
-		boolean isAlreadyInserted = recommendDAO.selectRecommendByUserId(recommend.getUserId(), connection);
+		boolean isAlreadyInserted = recommendDAO.selectRecommendByUserId(recommend.getUserId());
 		recommendDAO.closeConnection(this.connection);
 		
 		System.out.println(isAlreadyInserted);
@@ -30,12 +30,12 @@ public class RecommendRegistManager {
 		if(isAlreadyInserted)
 		{
 			this.connection = recommendDAO.createConnection();
-			recommendDAO.updateRecommendByUserId(recommend, connection);
+			recommendDAO.updateRecommendByUserId(recommend);
 			recommendDAO.closeConnection(this.connection);
 		}
 		else{
 			this.connection = recommendDAO.createConnection();
-			recommendDAO.insertRecommend(recommend, connection);
+			recommendDAO.insertRecommend(recommend);
 			recommendDAO.closeConnection(this.connection);
 		}
 
