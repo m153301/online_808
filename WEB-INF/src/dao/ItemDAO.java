@@ -125,40 +125,4 @@ public class ItemDAO extends DriverAccessor{
 		}
 		return autoIncKey;
 	}
-	
-	//商品IDのリストから商品名のリストを取得する
-	public List<String> selectItemNameByItemId(List<Integer> itemIdList){
-		
-		List<String> itemNameList = new ArrayList<String>();
-		
-		for ( int i=0; i < itemIdList.size(); i++ ) {
-			try{
-				int itemId = itemIdList.get(i);
-				
-				String sql = "select item_name from item where item_id = " + itemId + ";";
-				
-				Connection con = null;
-				con = createConnection();
-				
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				
-				rs.next();
-				
-				itemNameList.add( rs.getString( "item_name" ) );
-				System.out.println(rs.getString( "item_name" ));
-				
-				stmt.close();
-				rs.close();
-				con = null;
-			}
-			catch(SQLException e){
-				e.printStackTrace();
-			}
-			finally {
-				
-			}
-		}
-		return itemNameList;
-	}
 }

@@ -1,22 +1,16 @@
 package controller;
 
-
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.IpHistoryDAO;
-import dao.ItemDAO;
 import dao.RecommendDAO;
 import dao.UserDAO;
-import beans.Recommend;
 import beans.User;
 
 
 //とりあえず作ったからあとで直す
 public class LoginManager{
-	
-	private Connection connection = null;
 	
 	public LoginManager(){
 	}
@@ -73,24 +67,11 @@ public class LoginManager{
 	//おすすめをrecommendテーブルから取得し、おすすめされている商品一覧を返す
 	public List<String> getRecommendedItemName(){
 		
-		ArrayList<Recommend> recommendList = new ArrayList<Recommend>();
 		List<String> itemNameList = new ArrayList<String>();
 		
 		//おすすめテーブルから一覧を取得
 		RecommendDAO recommendDAO = new RecommendDAO();
-		recommendList = recommendDAO.selectRecommendAll();
-		
-		//Recommendオブジェクトから商品IDを取り出す
-		List<Integer> itemIdList = new ArrayList<Integer>();
-		for ( int i=0; i < recommendList.size(); i++ ){
-			itemIdList.add( recommendList.get(i).getItemId() );
-		}
-		
-		//おすすめリストから、商品リストを取得
-		ItemDAO itemDAO = new ItemDAO();
-		this.connection = itemDAO.createConnection();
-		itemNameList = itemDAO.selectItemNameByItemId(itemIdList);
-		this.connection = null;
+		itemNameList = recommendDAO.selectRecommendAll();
 		
 		return itemNameList;
 	}

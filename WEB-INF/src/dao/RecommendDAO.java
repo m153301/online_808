@@ -10,11 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Calendar;
 import java.util.Date;
 
 import utility.DriverAccessor;
-import beans.Recommend;
 
 public class RecommendDAO extends DriverAccessor{
 
@@ -165,13 +165,13 @@ public class RecommendDAO extends DriverAccessor{
 		return isAlreadyExists;
 	}
 	
-	//おすすめ一覧を取得する
-	public ArrayList<Recommend> selectRecommendAll(){
+	//おすすめされた商品名一覧を取得する
+	public List<String> selectRecommendAll(){
 		
-		ArrayList<Recommend> recommendList = new ArrayList<Recommend>();
+		List<String> itemNameList = new ArrayList<String>();
 		
 		try{
-			String sql = "select * from recommend;";
+			String sql = "SELECT * FROM recommend LEFT JOIN item using (item_id);";
 			
 			Connection con = null;
 			con = createConnection();
@@ -181,11 +181,7 @@ public class RecommendDAO extends DriverAccessor{
 			
 			while( rs.next() )
 			{
-				Recommend recommend = new Recommend( 
-						rs.getInt( "item_id" ), 
-						rs.getString( "user_id" ),
-						rs.getDate( "recommend_date" ) );
-				recommendList.add( recommend );
+				itemNameList.add( rs.getString( "item.item_name" ) );
 			}
 
 			stmt.close();
@@ -200,6 +196,6 @@ public class RecommendDAO extends DriverAccessor{
 		finally {
 			
 		}
-		return recommendList;
+		return itemNameList;
 	}
 }
