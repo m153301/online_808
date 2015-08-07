@@ -51,9 +51,9 @@ public class RecommendRegistServlet extends HttpServlet{
 		Recommend recommend = new Recommend( item_id, user.getUserId(), date );
 
 		RecommendRegistManager manager = new RecommendRegistManager();
-		manager.insertRecommend(recommend);
-
-		response.sendRedirect(response.encodeRedirectURL("./RecommendDone.jsp"));
+		int x = manager.insertRecommend(recommend);
+		
+		request.setAttribute("x", x + "");
+		getServletContext().getRequestDispatcher("/jsp/worker/RecommendDone.jsp").forward(request, response);
 	}
-
 }

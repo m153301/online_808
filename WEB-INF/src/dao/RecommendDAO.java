@@ -20,9 +20,10 @@ public class RecommendDAO extends DriverAccessor{
 
 
 	//おすすめを新たに登録する
-	public void insertRecommend( int itemId, String userId, Date date ){
+	public int insertRecommend( int itemId, String userId, Date date ){
+		
+		int x;
 		try{
-
 			//引数のDateはjava.util.Dateなのでjava.sql.dateに変換
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
@@ -43,25 +44,36 @@ public class RecommendDAO extends DriverAccessor{
 			stmt.setInt( 1, itemId );
 			stmt.setString( 2, userId );
 			stmt.setDate( 3, d2 );
-
+			
 			stmt.executeUpdate();
 			stmt.close();
 			con = null;
+			
+			x = 1;
 		}
 		catch(SQLException e){
 			
-			e.printStackTrace();
-			
+			if( e.toString().contains("Duplicate entry") && e.toString().contains("for key 'item_id") )
+			{
+				x = 0;
+			}
+			else
+			{
+				e.printStackTrace();
+				x = -1;
+			}
 		}
 		finally {
 
 		}
+		return x;
 	}
 	
 	//おすすめを上書き登録する
-	public void updateRecommendByUserId( int itemId, String userId, Date date ){
+	public int updateRecommendByUserId( int itemId, String userId, Date date ){
+		
+		int x;
 		try{
-			
 			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
@@ -87,20 +99,32 @@ public class RecommendDAO extends DriverAccessor{
 			stmt.executeUpdate();
 			stmt.close();
 			con = null;
+			
+			x = 1;
 		}
 		catch(SQLException e){
 			
-			e.printStackTrace();
+			if( e.toString().contains("Duplicate entry") && e.toString().contains("for key 'item_id") )
+			{
+				x = 0;
+			}
+			else
+			{
+				e.printStackTrace();
+				x = -1;
+			}
 			
 		}
 		finally {
 			
 		}
+		return x;
 	}
 	
 	//すでに当該店員がおすすめを登録していないか判定する
 	public boolean selectRecommendByUserId(String userId){
 		
+		Boolean isAlreadyExists = false;
 		try{
 			String sql = "select * from recommend where user_id='" + userId + "';";
 			
@@ -110,27 +134,35 @@ public class RecommendDAO extends DriverAccessor{
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			rs.next();
-			
-			System.out.println("@selectRecommendByUserId-----");
-			System.out.println( rs.getInt( "item_id" ) );
-			System.out.println( rs.getString( "user_id" ) );
-			System.out.println( rs.getDate( "recommend_date" ) );
-			System.out.println("-----------------------------");
-			
+			if( rs.next() )
+			{
+				System.out.println("@selectRecommendByUserId-----");
+				System.out.println( rs.getInt( "item_id" ) );
+				System.out.println( rs.getString( "user_id" ) );
+				System.out.println( rs.getDate( "recommend_date" ) );
+				System.out.println("-----------------------------");
+				isAlreadyExists = true;
+			}
+			else
+			{
+				System.out.println("@selectRecommendByUserId-----");
+				System.out.println("検索結果なし");
+				System.out.println("-----------------------------");
+				isAlreadyExists = false;
+			}
 			stmt.close();
 			rs.close();
 			con = null;
 		}
 		catch(SQLException e){
 			
-				e.printStackTrace();
-				return false;
+			e.printStackTrace();
+			isAlreadyExists = false;
 		}
 		finally {
 			
 		}
-		return true;
+		return isAlreadyExists;
 	}
 	
 	//おすすめ一覧を取得する
@@ -149,7 +181,6 @@ public class RecommendDAO extends DriverAccessor{
 			
 			while( rs.next() )
 			{
-
 				Recommend recommend = new Recommend( 
 						rs.getInt( "item_id" ), 
 						rs.getString( "user_id" ),
@@ -163,7 +194,7 @@ public class RecommendDAO extends DriverAccessor{
 		}
 		catch(SQLException e){
 			
-				e.printStackTrace();
+			e.printStackTrace();
 				
 		}
 		finally {
