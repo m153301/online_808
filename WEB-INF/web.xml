@@ -78,6 +78,12 @@
 		<servlet-name>SaleBrowseServlet</servlet-name>
 		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>PurchaseHistoryServlet</servlet-name>
+		<servlet-class>servlet.PurchaseHistoryServlet</servlet-class></servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseHistoryServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseHistoryServlet</url-pattern></servlet-mapping>
 
 </web-app>
 
