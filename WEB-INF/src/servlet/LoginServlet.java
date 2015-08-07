@@ -15,6 +15,7 @@ import utility.PasswordEncryption;
 import beans.IpHistory;
 import beans.User;
 import controller.LoginManager;
+import controller.RecommendManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,7 +82,8 @@ public class LoginServlet extends HttpServlet{
 					
 					//おすすめ情報をCustomerTopに渡す
 					List<String> itemNameList = new ArrayList<String>();
-					itemNameList = loginManager.getRecommendedItemName();
+					RecommendManager recommendManager = new RecommendManager();
+					itemNameList = recommendManager.getRecommendedItemName();
 					request.setAttribute("RecommendedItemNameList", itemNameList);
 
 					getServletContext().getRequestDispatcher("/jsp/customer/CustomerTop.jsp").forward(request, response);

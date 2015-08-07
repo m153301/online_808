@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import utility.DriverAccessor;
+import beans.Recommend;
 
 public class RecommendDAO extends DriverAccessor{
 
@@ -121,10 +122,10 @@ public class RecommendDAO extends DriverAccessor{
 		return x;
 	}
 	
-	//すでに当該店員がおすすめを登録していないか判定する
-	public boolean selectRecommendByUserId(String userId){
+	//UserIdからおすすめを取得する
+	public Recommend selectRecommendByUserId(String userId){
 		
-		Boolean isAlreadyExists = false;
+		Recommend recommend = new Recommend();
 		try{
 			String sql = "select * from recommend where user_id='" + userId + "';";
 			
@@ -141,14 +142,18 @@ public class RecommendDAO extends DriverAccessor{
 				System.out.println( rs.getString( "user_id" ) );
 				System.out.println( rs.getDate( "recommend_date" ) );
 				System.out.println("-----------------------------");
-				isAlreadyExists = true;
+				
+				recommend.setItemId( rs.getInt( "item_id" ) );
+				recommend.setUserId( rs.getString( "user_id" ) );
+				recommend.setDate( rs.getDate( "recommend_date" ) );
+				
 			}
 			else
 			{
 				System.out.println("@selectRecommendByUserId-----");
 				System.out.println("検索結果なし");
 				System.out.println("-----------------------------");
-				isAlreadyExists = false;
+				recommend = null;
 			}
 			stmt.close();
 			rs.close();
@@ -157,12 +162,13 @@ public class RecommendDAO extends DriverAccessor{
 		catch(SQLException e){
 			
 			e.printStackTrace();
-			isAlreadyExists = false;
+			recommend = null;
+			
 		}
 		finally {
 			
 		}
-		return isAlreadyExists;
+		return recommend;
 	}
 	
 	//おすすめされた商品名一覧を取得する

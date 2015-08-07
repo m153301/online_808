@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.Item;
-import controller.ItemInfoGetManager;
+import controller.RecommendManager;
 
 
 public class ItemInfoGetServlet extends HttpServlet{
@@ -35,12 +35,8 @@ public class ItemInfoGetServlet extends HttpServlet{
 
 		List<Item> items = new ArrayList<Item>();
 
-		ItemInfoGetManager manager = new ItemInfoGetManager();
+		RecommendManager manager = new RecommendManager();
 		items = manager.getItemInfo();
-
-		//セッションを実装したらここを使う
-		//セッションからユーザIDを取得
-		HttpSession session = request.getSession(true);
 		
 		request.setAttribute("items", items);
 		getServletContext().getRequestDispatcher("/jsp/worker/RecommendRegist.jsp").forward(request, response);

@@ -63,16 +63,4 @@ public class LoginManager{
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		ipHistoryDAO.resetIpHistoryFailCountByIp(ip);
 	}	
-
-	//おすすめをrecommendテーブルから取得し、おすすめされている商品一覧を返す
-	public List<String> getRecommendedItemName(){
-		
-		List<String> itemNameList = new ArrayList<String>();
-		
-		//おすすめテーブルから一覧を取得
-		RecommendDAO recommendDAO = new RecommendDAO();
-		itemNameList = recommendDAO.selectRecommendAll();
-		
-		return itemNameList;
-	}
 }

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Recommend;
 import beans.User;
-import controller.RecommendRegistManager;
+import controller.RecommendManager;
 
 
 public class RecommendRegistServlet extends HttpServlet{
@@ -50,7 +50,7 @@ public class RecommendRegistServlet extends HttpServlet{
 
 		Recommend recommend = new Recommend( item_id, user.getUserId(), date );
 
-		RecommendRegistManager manager = new RecommendRegistManager();
+		RecommendManager manager = new RecommendManager();
 		int x = manager.insertRecommend(recommend);
 		
 		request.setAttribute("x", x + "");
