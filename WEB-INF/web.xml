@@ -4,16 +4,19 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
-  <servlet>
+	<servlet>
 		<servlet-name>ItemInfoRegist</servlet-name>
 		<servlet-class>servlet.ItemInfoRegistServlet</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>ItemInfoChangeListServlet</servlet-name>
 		<servlet-class>servlet.ItemInfoChangeListServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>ItemInfoChangeListServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoChangeListServlet</url-pattern>
@@ -35,11 +38,6 @@
 	<servlet-mapping>
 		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoChangeCheckServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>ItemInfoRegist</servlet-name>
-		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -69,7 +67,6 @@
 		<url-pattern>/jsp/worker/OrderHistoryBrowseServlet</url-pattern>
 	</servlet-mapping>
 
-
 	<servlet>
 		<servlet-name>SaleBrowseServlet</servlet-name>
 		<servlet-class>servlet.SaleBrowseServlet</servlet-class>
@@ -77,6 +74,24 @@
 	<servlet-mapping>
 		<servlet-name>SaleBrowseServlet</servlet-name>
 		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
 	</servlet-mapping>
 
 </web-app>
