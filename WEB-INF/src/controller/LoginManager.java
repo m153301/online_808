@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import validator.UserValidator;
 import dao.IpHistoryDAO;
 import dao.RecommendDAO;
 import dao.UserDAO;
@@ -62,5 +63,20 @@ public class LoginManager{
 	public void resetIpHistoryFailCountByIp(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		ipHistoryDAO.resetIpHistoryFailCountByIp(ip);
+	}
+
+	//入力した値のチェック．不正な値だったらerrorを返す
+	public static List<String> validateLoginForm(String userId, String password) {
+		
+		List<String> errors = new ArrayList<String>();
+		UserValidator userValidator = new UserValidator();
+		
+		String userIdError = userValidator.validateUserId(userId);
+		String userPasswordError = userValidator.validateUserPassword(password);
+		
+		if( userIdError != null) errors.add(userIdError);
+		if( userPasswordError != null ) errors.add(userPasswordError);
+		
+		return errors;
 	}	
 }
