@@ -5,7 +5,9 @@ package dao;
 //  自分が格納されているフォルダの外にある必要なクラス
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import utility.DriverAccessor;
 
@@ -47,4 +49,47 @@ public class OrderHistoryDAO extends DriverAccessor{
 			}
 			finally{}
 	}
+
+
+
+	//発注履歴を検索する
+	public ArrayList<String> selectOrderHistory(){
+
+		Connection con = null;
+		con = createConnection();
+
+		try{
+
+			String sql="SELECT * from order_history LEFT JOIN item using  (item_id) LEFT JOIN user using (user_id);";
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+			ArrayList<String> orderHistoryList = new ArrayList<String>();
+
+			while(rs.next())
+		    {
+			orderHistoryList.add(rs.getString("order_history.order_id"));
+			orderHistoryList.add(rs.getString("user.user_name"));
+			orderHistoryList.add(rs.getString("item.item_name"));
+			orderHistoryList.add(rs.getString("order_history.order_date"));
+			orderHistoryList.add(rs.getString("order_history.order_quantity"));
+			}
+
+			stmt.close();
+			rs.close();
+			con = null;
+
+			return orderHistoryList;
+
+		}catch(SQLException e){
+
+			e.printStackTrace();
+			return null;
+
+		} finally {
+
+		}
+	}
+
 }

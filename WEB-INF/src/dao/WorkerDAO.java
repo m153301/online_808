@@ -14,7 +14,7 @@ public class WorkerDAO extends DriverAccessor{
 		con = createConnection();
 		
 		try{
-			String sql = "insert into customer values (?);";
+			String sql = "insert into worker values (?);";
 			
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
