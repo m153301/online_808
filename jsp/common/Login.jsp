@@ -20,6 +20,7 @@
 			out.println("</font>");
 		}
 	%>
+	<font color="red">${error}</font>
 	<table style="width: 360px; margin-left: auto; margin-right: auto; height: 240px;" border="1" cellpadding="2" cellspacing="2">
 		<tbody>
 			<tr>
