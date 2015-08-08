@@ -67,14 +67,8 @@ public class LoginServlet extends HttpServlet{
 			}
 			
 			else{
-				//ユーザが持ってこれていない場合．
-				if(user==null){
-					request.setAttribute("error", "IDまたはパスワードが間違っています。");	
-					//失敗してるからincrementする
-					loginManager.incrementIpHistoryFailCountByIp(ip);
-					getServletContext().getRequestDispatcher("/jsp/common/Login.jsp").forward(request, response);
-				}
-				else{
+				//userがもってこれている．
+				if(user!=null){
 					//一回でもログインに成功したら失敗回数のリセット
 					loginManager.resetIpHistoryFailCountByIp(ip);
 					HttpSession session = request.getSession();
@@ -101,6 +95,14 @@ public class LoginServlet extends HttpServlet{
 						getServletContext().getRequestDispatcher("/jsp/worker/WorkerTop.jsp").forward(request, response);
 					}
 				}
+				//ログイン失敗
+				else{
+					request.setAttribute("error", "IDまたはパスワードが間違っています。");	
+					//失敗してるからincrementする
+					loginManager.incrementIpHistoryFailCountByIp(ip);
+					getServletContext().getRequestDispatcher("/jsp/common/Login.jsp").forward(request, response);
+				}
+					
 			}
 		}
 		else{
