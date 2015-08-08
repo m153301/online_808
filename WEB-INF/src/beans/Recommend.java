@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Recommend {
 	private int itemId;
-	private String workerId;
+	private String userId;
 	private Date date;
 
 	public Recommend(){}
-	public Recommend(int itemId, String workerId, Date date) {
+	public Recommend(int itemId, String userId, Date date) {
 		super();
 		this.itemId = itemId;
-		this.workerId = workerId;
+		this.userId = userId;
 		this.date = date;
 	}
 	public int getItemId() {
@@ -20,11 +20,11 @@ public class Recommend {
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
-	public String getWorkerId() {
-		return workerId;
+	public String getUserId() {
+		return userId;
 	}
-	public void setWorkerId(String workerId) {
-		this.workerId = workerId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public Date getDate() {
 		return date;

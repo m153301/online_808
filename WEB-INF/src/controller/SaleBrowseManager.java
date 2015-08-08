@@ -16,7 +16,7 @@ public class SaleBrowseManager {
 		PurchaseHistoryDAO saleHistoryDAO = new PurchaseHistoryDAO();
 
 		//購入履歴をとってくる
-		ArrayList<String> saleHistoryList = saleHistoryDAO.selectPurchaseHistoryByAll();
+		ArrayList<String> saleHistoryList = saleHistoryDAO.selectPurchaseHistoryAll();
 
 		return saleHistoryList;
 	}

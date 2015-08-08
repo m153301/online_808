@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page import="beans.Item" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
-<!-- ItemInfoGetServletからリストを取得 -->
-<%
-ArrayList<Item> itemList = (ArrayList)request.getAttribute("ItemList");
-%>
-
+<%@ page import="java.util.List" %>
 <html>
 <head>
 	<title>RecommendRegist</title>
@@ -31,12 +25,12 @@ ArrayList<Item> itemList = (ArrayList)request.getAttribute("ItemList");
 					<td style="vertical-align: middle; width: 150px; text-align: center;">在庫</td>
 				</tr>
 				<%
-				//iteratorの生成
-				Iterator<Item> iterator=itemList.iterator();
-				//順番に中身がなくなるまで取り出す
-				while(iterator.hasNext())
+				//ItemInfoGetServletからリストを取得
+				List<Item> items = (List<Item>)request.getAttribute("items");
+				
+				//itemの数だけ表を生成
+				for( Item item : items )
 				{
-					Item item = iterator.next();
 					out.println("<tr>");
 						out.println("<td style='text-align: center; width: 40px; height: 60px;'>");
 							out.println("<input type='radio' name='item_id' value=" + item.getItemId() + ">");

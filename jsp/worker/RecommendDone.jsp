@@ -8,7 +8,11 @@
 	<div class="title">
 		<br>
 		<br>
-		登録が完了しました<br>
+		<%
+			String recommendRegistResult = (String)request.getAttribute("recommendRegistResult");
+			out.println( recommendRegistResult );
+		%>
+		<br>
 		<br>
 		<br>
 		<br>
