@@ -2,11 +2,11 @@ package beans;
 
 public class Creditcard {
 	private int creditcardId;
-	private String creditcardType;
+	private int creditcardType;
 	private String creditcardNumber;
 
 	public Creditcard() {}
-	public Creditcard(int creditcardId, String creditcardType,
+	public Creditcard(int creditcardId, int creditcardType,
 			String creditcardNumber) {
 		super();
 		this.creditcardId = creditcardId;
@@ -22,11 +22,11 @@ public class Creditcard {
 		this.creditcardId = creditcardId;
 	}
 
-	public String getCreditcardType() {
+	public int getCreditcardType() {
 		return creditcardType;
 	}
 
-	public void setCreditcardType(String creditcardType) {
+	public void setCreditcardType(int creditcardType) {
 		this.creditcardType = creditcardType;
 	}
 

@@ -7,7 +7,7 @@
 <body>
 	<br>
 	<br>
-	<form action="./CustomerRegistServlet", method="post">
+	<form action="./CustomerInfoRegistServlet", method="post">
 	<table style="text-align: left; width: 360px; margin-left: auto; margin-right: auto; height: 480px;" border="1" cellpadding="2" cellspacing="2">
 		<tbody>
 			<tr align="center">
