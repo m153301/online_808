@@ -57,6 +57,28 @@
 		<servlet-name>LogOutServlet</servlet-name>
 		<url-pattern>/jsp/common/LogOutServlet</url-pattern>
 	</servlet-mapping>
+<<<<<<< HEAD
+=======
+	
+	<servlet>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
+>>>>>>> 39701de98dd834d27d748039365a70dcf772fc10
 
 	<servlet>
 		<servlet-name>OrderHistoryServlet</servlet-name>
@@ -109,8 +131,12 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RecommendRegistServlet</servlet-name>
+<<<<<<< HEAD
 		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
+=======
+		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
+>>>>>>> 39701de98dd834d27d748039365a70dcf772fc10
 	</servlet-mapping>
-
 </web-app>
+
 
