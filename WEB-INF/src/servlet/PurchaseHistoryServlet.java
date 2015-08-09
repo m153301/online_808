@@ -28,10 +28,7 @@ public class PurchaseHistoryServlet extends HttpServlet{
 		public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 
-			request.setCharacterEncoding("UTF-8");
-			
-			//確認用
-			System.out.println("hey");			
+			request.setCharacterEncoding("UTF-8");			
 			
 			//セッション取得
 			HttpSession session = request.getSession(true);
