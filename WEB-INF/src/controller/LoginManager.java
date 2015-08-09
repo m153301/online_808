@@ -1,7 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.IpHistoryDAO;
+import dao.RecommendDAO;
 import dao.UserDAO;
 import beans.User;
 
@@ -59,5 +62,5 @@ public class LoginManager{
 	public void resetIpHistoryFailCountByIp(String ip){
 		IpHistoryDAO ipHistoryDAO = new IpHistoryDAO();
 		ipHistoryDAO.resetIpHistoryFailCountByIp(ip);
-	}
+	}	
 }
