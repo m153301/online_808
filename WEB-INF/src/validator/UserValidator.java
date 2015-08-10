@@ -17,7 +17,7 @@ public class UserValidator{
 	}
 	
 	public String validateUserId(String userId){
-		if(userId.length() > MAX_LENGTH_USER_ID || userId.length() < 0){
+		if(userId.length() > MAX_LENGTH_USER_ID || userId.length() < 1){
 			return ERROR_USER_ID_TOO_LONG;
 		}
 		else if(!isByte(userId)){
@@ -27,7 +27,7 @@ public class UserValidator{
 	}
 	
 	public String validateUserPassword(String userPassword){
-		if(userPassword.length()> MAX_LENGTH_USER_PASSWORD || userPassword.length() < 0){
+		if(userPassword.length()> MAX_LENGTH_USER_PASSWORD || userPassword.length() < 1){
 			return ERROR_USER_PASSWORD_TOO_LONG;
 		}
 //		else if(!isByte(userPassword)){

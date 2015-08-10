@@ -15,20 +15,18 @@ public class CustomerValidator{
 		if(customerTel.length() > MAX_LENGTH_CUSTOMER_TEL || customerTel.length() < 0){
 			return ERROR_CUSTOMER_TEL_TOO_LONG;
 		}
-		else if(!isByte(customerTel)){
+		else if(!isNumber(customerTel)){
 			return ERROR_CUSTOMER_TEL_IS_NOT_BYTE;
 		}
 		return null;
 	}
 
-	private boolean isByte(String chara) {
-		byte[] bytes = chara.getBytes();
-		if(chara.length() == bytes.length){
-			return true;
-		}
-		else{
-			//全角混入
-			return false;
-		}
+	private boolean isNumber(String number) {
+		try {
+	        Integer.parseInt(number);
+	        return true;
+	        } catch (NumberFormatException e) {
+	        return false;
+	    }
 	}
 }

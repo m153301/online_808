@@ -21,9 +21,9 @@ public class CreditcardValidator {
 		return null;
 	}
 
-	private boolean isNumber(String cardNumber) {
+	private boolean isNumber(String number) {
 		try {
-	        Integer.parseInt(cardNumber);
+	        Integer.parseInt(number);
 	        return true;
 	        } catch (NumberFormatException e) {
 	        return false;
