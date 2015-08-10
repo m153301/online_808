@@ -13,15 +13,15 @@
 <%
 	User user = (User)session.getAttribute("customer");
 	out.println(user.getUserName() + "さん ようこそ！<br><br>");
-	List<String> recommendedItemNameList = (List)request.getAttribute("RecommendItemNameList");
+	List<String> recommendItemNameList = (List)request.getAttribute("RecommendItemNameList");
 %>
 	<div class="title">
 		☆おすすめ☆<br>
 		<%
-			//順番に中身がなくなるまで取り出す
-			for( int i=0; i < recommendedItemNameList.size(); i++ )
+			//順番に取り出す
+			for( int i=0; i < recommendItemNameList.size(); i++ )
 			{
-				String itemName = recommendedItemNameList.get(i);
+				String itemName = recommendItemNameList.get(i);
 				out.println(itemName + "<br>");
 			}
 		%>

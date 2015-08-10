@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet{
 						List<String> itemNameList = new ArrayList<String>();
 						RecommendManager recommendManager = new RecommendManager();
 						itemNameList = recommendManager.selectRecommendItemName();
-						request.setAttribute("RecommendedItemNameList", itemNameList);
+						request.setAttribute("RecommendItemNameList", itemNameList);
 	
 						getServletContext().getRequestDispatcher("/jsp/customer/CustomerTop.jsp").forward(request, response);
 					}
