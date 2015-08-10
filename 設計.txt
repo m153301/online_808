@@ -1,0 +1,70 @@
+- クラス命名規則
+
+  - 先頭大文字
+  - キャメルケース
+
+- メソッド命名規則
+
+  - 先頭小文字
+  - キャメルケース
+
+  - DAO
+
+    - 追加
+
+      - insert + table名
+      example)   insertItem 
+
+
+    - 検索   
+      
+      - select + table名 + 必要なカラム名（全ての情報が必要な場合不要） + By + 検索に必要なカラム名
+      example)   selectItemNameByItemId 
+
+
+    - 更新 
+
+      - update + table名 + updateするカラム名（全て更新する場合不要） + By + 更新に必要なカラム名
+      example)   updateItemNameByItemId
+
+
+    - 削除
+    
+      - delete + table名 + By + 削除に必要なカラム名
+      example)   deleteItemByItemId 
+
+- 変数名
+
+  - formのname属性
+
+    - 先頭小文字
+    - スネークケース
+
+  - その他
+
+    - 先頭小文字
+    - キャメルケース
+
+- その他
+
+    - Connection con
+    
+    - DAOオブジェクト名　ex)  UserDAO userDAO
+   
+    - Managerオブジェクト名  ex)  ItemRegistManager itemRegistManager
+
+- 設計
+
+  - 機能毎にmanagerを1つ作成
+  - DAOとtableは一対一
+
+　　example)  ItemDAOはItemテーブルの操作を一元管理
+
+  - DAOのメソッドの引数はオブジェクトを渡さずカラムに対応する変数を渡す
+
+    example)  
+　　　　
+　　　　　selectUserNameByUserId( User user , Connection con ) ×
+　　　　　selectUserNameByUserId( int userId , Connection con ) ◯
+
+  - Customerクラス・WorkerクラスはUserクラスを継承させる
