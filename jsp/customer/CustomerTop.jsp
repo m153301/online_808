@@ -13,7 +13,7 @@
 <%
 	User user = (User)session.getAttribute("customer");
 	out.println(user.getUserName() + "さん ようこそ！<br><br>");
-	List<String> recommendedItemNameList = (List)request.getAttribute("RecommendedItemNameList");
+	List<String> recommendedItemNameList = (List)request.getAttribute("RecommendItemNameList");
 %>
 	<div class="title">
 		☆おすすめ☆<br>
