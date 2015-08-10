@@ -3,7 +3,6 @@
 <%@ page import="beans.Item" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Iterator" %>
 <html>
 <head>
 	<title>CustomerTop</title>
