@@ -6,7 +6,9 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import validator.CustomerValidator;
 import validator.UserValidator;
+import validator.CreditcardValidator;
 import beans.Creditcard;
 import beans.Customer;
 import beans.User;
@@ -57,16 +59,14 @@ public class CustomerInfoRegistManager {
 		
 	}
 
-	//例外の重複チェック
-	public List<String> validator(User user, Customer customer,
-			Creditcard creditcard) {
-		// TODO Auto-generated method stub
+	
+	//入力した値のチェック，不正な値だったらerrorsを返す
+	public List<String> validateCustomerInfoRegistForm(User user,
+			Customer customer, Creditcard creditcard) {
 		List<String> errors = new ArrayList<String>();
 		UserValidator userValidator = new UserValidator();
-		
-		String userIdError = userValidator.validateUserId(user.getUserId());
-		String userPasswordError = userValidator.validateUserPassword(user.getPassword());
-		String userNameError = userValidator.validateUserName(user.getUserName());
+		CustomerValidator customerValidator = new CustomerValidator();
+		CreditCardValidator creditCardValidator = new CreditCardValidator();
 		return null;
 	}
 	

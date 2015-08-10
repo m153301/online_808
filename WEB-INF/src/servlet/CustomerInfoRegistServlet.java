@@ -50,7 +50,7 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			Creditcard creditcard = new Creditcard(0, creditTypeId,creditcardNumber);
 			
 			//不正な値が入っていないかチェック
-//			List<String> errors = customerInfoRegistManager.validator(user,customer,creditcard);
+			List<String> errors = customerInfoRegistManager.validateCustomerInfoRegistForm(user,customer,creditcard);
 			
 			//顧客情報の重複のチェック
 			int countId = customerInfoRegistManager.selectCountUserByUserId(userId);
