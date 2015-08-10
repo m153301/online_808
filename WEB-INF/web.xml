@@ -4,16 +4,19 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
-  <servlet>
+	<servlet>
 		<servlet-name>ItemInfoRegist</servlet-name>
 		<servlet-class>servlet.ItemInfoRegistServlet</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>ItemInfoChangeListServlet</servlet-name>
 		<servlet-class>servlet.ItemInfoChangeListServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>ItemInfoChangeListServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoChangeListServlet</url-pattern>
@@ -37,11 +40,6 @@
 		<url-pattern>/jsp/worker/ItemInfoChangeCheckServlet</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>ItemInfoRegist</servlet-name>
-		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
-	</servlet-mapping>
-
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>servlet.LoginServlet</servlet-class>
@@ -59,25 +57,6 @@
 		<servlet-name>LogOutServlet</servlet-name>
 		<url-pattern>/jsp/common/LogOutServlet</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>CustomerInfoRegistServlet</servlet-name>
-		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CustomerInfoRegistServlet</servlet-name>
-		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>WorkerInfoRegistServlet</servlet-name>
-		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WorkerInfoRegistServlet</servlet-name>
-		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
-	</servlet-mapping>
-
 
 	<servlet>
 		<servlet-name>OrderHistoryServlet</servlet-name>
@@ -96,7 +75,25 @@
 		<servlet-name>SaleBrowseServlet</servlet-name>
 		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>ItemInfoGetServlet</servlet-name>
 		<servlet-class>servlet.ItemInfoGetServlet</servlet-class>
@@ -105,7 +102,7 @@
 		<servlet-name>ItemInfoGetServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoGetServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<servlet-class>servlet.RecommendRegistServlet</servlet-class>
