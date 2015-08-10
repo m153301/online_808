@@ -95,6 +95,23 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>SaleBrowsServlet</servlet-name>
+		<servlet-class>servlet.SaleBrowsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SaleBrowsServlet</servlet-name>
+		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
+	</servlet-mapping>
+		
+	<servlet>
+		<servlet-name>PurchaseHistoryServlet</servlet-name>
+		<servlet-class>servlet.PurchaseHistoryServlet</servlet-class></servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseHistoryServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseHistoryServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ItemInfoGetServlet</servlet-name>
 		<servlet-class>servlet.ItemInfoGetServlet</servlet-class>
 	</servlet>
@@ -111,6 +128,44 @@
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemListServlet</servlet-name>
+		<servlet-class>servlet.ItemListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemListServlet</servlet-name>
+		<url-pattern>/jsp/customer/ItemListServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ItemPurchaseServlet</servlet-name>
+		<servlet-class>servlet.ItemPurchaseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemPurchaseServlet</servlet-name>
+		<url-pattern>/jsp/customer/ItemPurchaseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PurchaseRegistServlet</servlet-name>
+		<servlet-class>servlet.PurchaseRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseRegistServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseRegistServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PurchaseCheckServlet</servlet-name>
+		<servlet-class>servlet.PurchaseCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseCheckServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseCheckServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
+	
+	
 
 

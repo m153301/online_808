@@ -8,8 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+import beans.PurchaseHistory;
+import beans.User;
 import utility.DriverAccessor;
 
 public class PurchaseHistoryDAO extends DriverAccessor{
@@ -53,4 +56,46 @@ public class PurchaseHistoryDAO extends DriverAccessor{
 
 		}
 	}
+	
+	//購入履歴を表示するためDBから取り出す
+	public ArrayList<PurchaseHistory> getPurchaseHistory(User user){
+
+		Connection con = null;
+		con = createConnection();
+
+		ArrayList<PurchaseHistory> purchaseList = new ArrayList<PurchaseHistory>();
+		
+		try{
+			String sql = "select * from purchase_history INNER JOIN item on purchase_history.item_id = item.item_id WHERE purchase_history.user_id='" + user.getUserId() + "';";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while( rs.next() )
+			{
+
+				PurchaseHistory purchase = new PurchaseHistory( 
+						rs.getInt( "purchase_id" ),
+						rs.getInt( "item_id" ),
+						rs.getString( "item_name" ),
+						rs.getDate( "buy_date" ),
+						rs.getInt( "purchase_quantity"  ), 
+						rs.getString( "user_id"  ) );
+				purchaseList.add( purchase );
+			}
+
+			stmt.close();
+			rs.close();
+
+			return purchaseList;
+			
+		}
+		catch(SQLException e){
+				e.printStackTrace();
+				return null;
+		}
+		finally {
+			
+		}
+	}
+
 }
