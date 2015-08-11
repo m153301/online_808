@@ -18,7 +18,21 @@ public class CustomerValidator{
 		else if(!isNumber(customerTel)){
 			return ERROR_CUSTOMER_TEL_IS_NOT_BYTE;
 		}
+		else if(!isByte(customerTel)){
+			return ERROR_CUSTOMER_TEL_IS_NOT_BYTE;
+		}
 		return null;
+	}
+
+	private boolean isByte(String chara) {
+		byte[] bytes = chara.getBytes();
+		if(chara.length() == bytes.length){
+			return true;
+		}
+		else{
+			//全角混入
+			return false;
+		}
 	}
 
 	private boolean isNumber(String number) {
