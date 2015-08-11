@@ -2,24 +2,22 @@
 package servlet;
 
 /*****************************************************************************/
-//		商品一覧を取得するservlet
+//		おすすめされた商品のリストを返すservlet
 /*****************************************************************************/
 
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
 
-import beans.Item;
 import controller.RecommendManager;
 
 
-public class ItemInfoGetServlet extends HttpServlet{
+public class RecommendItemNameGetServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,13 +31,12 @@ public class ItemInfoGetServlet extends HttpServlet{
 
 		request.setCharacterEncoding("UTF-8");
 
-		List<Item> items = new ArrayList<Item>();
-
-		RecommendManager manager = new RecommendManager();
-		items = manager.getItemInfo();
+		List<String> recommendItemNameList = new ArrayList<String>();
 		
-		request.setAttribute("items", items);
-		getServletContext().getRequestDispatcher("/jsp/worker/RecommendRegist.jsp").forward(request, response);
+		RecommendManager manager = new RecommendManager();
+		recommendItemNameList = manager.selectRecommendItemName();
+		
+		request.setAttribute("RecommendItemNameList", recommendItemNameList );
+		getServletContext().getRequestDispatcher("/jsp/customer/CustomerTop.jsp").forward(request, response);
 	}
-
 }

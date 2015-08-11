@@ -8,9 +8,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.ItemDAO;
 import dao.RecommendDAO;
-import beans.Item;
 import beans.Recommend;
 
 public class RecommendManager {
@@ -41,7 +39,7 @@ public class RecommendManager {
 	}
 	
 	//おすすめをrecommendテーブルから取得し、おすすめされている商品一覧を返す
-	public List<String> getRecommendedItemName(){
+	public List<String> selectRecommendItemName(){
 		
 		List<String> itemNameList = new ArrayList<String>();
 		
@@ -50,16 +48,5 @@ public class RecommendManager {
 		itemNameList = recommendDAO.selectRecommendItemName();
 		
 		return itemNameList;
-	}
-	
-	//商品一覧の取得
-	public List<Item> getItemInfo(){
-		
-		List<Item> items = new ArrayList<Item>();
-		
-		ItemDAO itemDAO = new ItemDAO();
-		items = itemDAO.selectItemAll();
-		
-		return items;
 	}
 }

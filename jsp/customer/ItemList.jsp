@@ -13,7 +13,7 @@ ArrayList<Item> itemList = (ArrayList)request.getAttribute("ItemList");
 </head>
 <body>
 	<div style="text-align: right;">
-		<form method = "post" action="../customer/RecommendedItemGetServlet">
+		<form method = "post" action="../customer/RecommendItemNameGetServlet">
 			<input type="submit" value="買い物を終わる">
 		</form>
 		<br>

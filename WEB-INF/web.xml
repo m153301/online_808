@@ -95,15 +95,6 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>ItemInfoGetServlet</servlet-name>
-		<servlet-class>servlet.ItemInfoGetServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ItemInfoGetServlet</servlet-name>
-		<url-pattern>/jsp/worker/ItemInfoGetServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<servlet-class>servlet.RecommendRegistServlet</servlet-class>
 	</servlet>
@@ -111,6 +102,16 @@
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RecommendItemNameGetServlet</servlet-name>
+		<servlet-class>servlet.RecommendItemNameGetServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RecommendItemNameGetServlet</servlet-name>
+		<url-pattern>/jsp/customer/RecommendItemNameGetServlet</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
 
 
