@@ -35,8 +35,7 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			String creditcardNumber = StringEscapeUtils.escapeHtml4(request.getParameter("credit_number"));
 			int creditTypeId =  Integer.parseInt(request.getParameter("credit_type_id"));
 			String userId = StringEscapeUtils.escapeHtml4(request.getParameter("customer_id"));
-			PasswordEncryption passenc = new PasswordEncryption();
-			String password = passenc.getPassword_encryption(StringEscapeUtils.escapeHtml4(request.getParameter("customer_pass")));
+			String password = StringEscapeUtils.escapeHtml4(request.getParameter("customer_pass"));
 			
 			CustomerInfoRegistManager customerInfoRegistManager = new CustomerInfoRegistManager();
 			
@@ -50,24 +49,38 @@ public class CustomerInfoRegistServlet extends HttpServlet{
 			Creditcard creditcard = new Creditcard(0, creditTypeId,creditcardNumber);
 			
 			//不正な値が入っていないかチェック
-//			List<String> errors = customerInfoRegistManager.validator(user,customer,creditcard);
+			List<String> errors = customerInfoRegistManager.validateCustomerInfoRegistForm(user,customer,creditcard);
+			request.setAttribute("errors",errors);
 			
-			//顧客情報の重複のチェック
-			int countId = customerInfoRegistManager.selectCountUserByUserId(userId);
-			
-			if(countId == 0){
+			if(errors.isEmpty()){
+				//顧客情報の重複のチェック
+				int countId = customerInfoRegistManager.selectCountUserByUserId(userId);
 				
-				//顧客情報を登録
-				customerInfoRegistManager.registCustomerInfo(user, customer, creditcard);
-				//完了画面へ
-				response.sendRedirect(response.encodeRedirectURL("./CustomerInfoRegistDone.jsp"));
+				if(countId == 0){
+					//パスワードのハッシュ化
+					PasswordEncryption passenc = new PasswordEncryption();
+					String hashPassword = passenc.getPassword_encryption(password);
+					
+					//userオブジェクトのパスの更新
+					user.setPassword(hashPassword);
+					
+					//顧客情報を登録
+					customerInfoRegistManager.registCustomerInfo(user, customer, creditcard);
+					//完了画面へ
+					response.sendRedirect(response.encodeRedirectURL("./CustomerInfoRegistDone.jsp"));
+					
+				}
 				
+				else{
+					request.setAttribute("error", "そのidはすでに登録があります．");
+					getServletContext().getRequestDispatcher("/jsp/common/CustomerInfoRegist.jsp").forward(request, response);
+				}
 			}
-			
 			else{
-				request.setAttribute("error", "そのidはすでに登録があります．");
 				getServletContext().getRequestDispatcher("/jsp/common/CustomerInfoRegist.jsp").forward(request, response);
 			}
+			
+			
 			
 			
 			
