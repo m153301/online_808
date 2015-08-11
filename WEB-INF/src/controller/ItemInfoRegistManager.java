@@ -29,7 +29,8 @@ public class ItemInfoRegistManager {
 	public void insertOrderHistory(String userId, int itemId, int orderQuantity, java.util.Date date) {
 
 		OrderHistoryDAO orderHistoryDAO = new OrderHistoryDAO();
-		orderHistoryDAO.insertOrderHistory(userId, itemId, orderQuantity, date);
+		java.sql.Date date2 = new java.sql.Date(date.getTime());//Date型をSQLの型に変更
+		orderHistoryDAO.insertOrderHistory(userId, itemId, orderQuantity, date2);
 
 	}
 
