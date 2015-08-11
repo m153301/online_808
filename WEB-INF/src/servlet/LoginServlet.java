@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import utility.PasswordEncryption;
-import beans.IpHistory;
 import beans.User;
 import controller.LoginManager;
 import controller.RecommendManager;
@@ -31,8 +30,8 @@ public class LoginServlet extends HttpServlet{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("id");
-		String password = request.getParameter("pass");
+		String userId = StringEscapeUtils.escapeHtml4( request.getParameter("id"));
+		String password = StringEscapeUtils.escapeHtml4(request.getParameter("pass"));
 		
 		//不正な値が入っていないかチェック
 		List<String> errors = LoginManager.validateLoginForm(userId,password);
