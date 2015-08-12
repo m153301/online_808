@@ -112,6 +112,32 @@
 		<url-pattern>/jsp/customer/RecommendItemNameGetServlet</url-pattern>
 	</servlet-mapping>
 	
+	<filter>
+		<filter-name>CustomerFilter</filter-name>
+		<filter-class>servlet.CustomerFilter</filter-class>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/jsp/common/Login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CustomerFilter</filter-name>
+		<url-pattern>/jsp/worker/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>CommonFilter</filter-name>
+		<filter-class>servlet.CommonFilter</filter-class>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/jsp/common/Login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CommonFilter</filter-name>
+		<url-pattern>/jsp/customer/*</url-pattern>
+	</filter-mapping>
+	
 </web-app>
 
 
