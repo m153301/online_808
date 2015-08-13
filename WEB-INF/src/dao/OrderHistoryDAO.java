@@ -14,7 +14,7 @@ import utility.DriverAccessor;
 public class OrderHistoryDAO extends DriverAccessor{
 
 	//発注した商品を発注履歴に格納する
-	public void insertOrderHistory(String userId, int itemId, int orderQuantity, java.util.Date date){
+	public void insertOrderHistory(String userId, int itemId, int orderQuantity, java.sql.Date date){
 
 		Connection con = null;
 		con = createConnection();
@@ -27,11 +27,9 @@ public class OrderHistoryDAO extends DriverAccessor{
 			//  SQLのコマンドを実行する
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			java.sql.Date d2 = new java.sql.Date(date.getTime());
-
 			stmt.setString(1, userId);
 			stmt.setInt(2, itemId);
-			stmt.setDate(3, d2);
+			stmt.setDate(3, date);
 			stmt.setInt(4, orderQuantity);
 
 			stmt.executeUpdate();

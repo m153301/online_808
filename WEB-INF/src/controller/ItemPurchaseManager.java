@@ -29,23 +29,22 @@ public class ItemPurchaseManager {
 		return items;
 	}
 	
-	public void RegistPurchase(int item_id,int quant,User user,int price){
+	public void insertPurchase(int item_id,int quant,User user,int price){
 	
 		PurchaseDAO purchaseDAO = new PurchaseDAO();
 		
-		purchaseDAO.RegistPurchase(item_id,quant,user,price);
+		purchaseDAO.insertPurchase(item_id,quant,user,price);
 		purchaseDAO.closeConnection(this.connection);
 
 		this.connection = null;
 		
 	}
 	
-	public void CalculateItem(int item_id,int quant){
+	public void calculateItem(int item_id,int quant){
 		
 		PurchaseDAO purchaseDAO = new PurchaseDAO();
 		
-		this.connection = purchaseDAO.createConnection();
-		purchaseDAO.CalculateItem(item_id,quant,connection);
+		purchaseDAO.calculateItem(item_id,quant);
 		purchaseDAO.closeConnection(this.connection);
 
 		this.connection = null;

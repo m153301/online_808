@@ -54,7 +54,7 @@ public class PurchaseDAO extends DriverAccessor{
 		}
 	}
 
-	public void RegistPurchase(int item_id,int quant,User user,int price){
+	public void insertPurchase(int item_id,int quant,User user,int price){
 
 		try{
 			Connection con = null;
@@ -101,12 +101,15 @@ public class PurchaseDAO extends DriverAccessor{
 		}
 	}
 	
-	public void CalculateItem(int item_id,int num,Connection connection){
+	public void calculateItem(int item_id,int num){
 		try{
+			
+			Connection con = null;
+			con = createConnection();
 
 			String sql = "update item set item_stock = " + num + " where item_id = " + item_id;
 
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = con.prepareStatement(sql);
 
 			stmt.executeUpdate();
 

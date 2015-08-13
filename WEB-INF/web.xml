@@ -4,16 +4,19 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
-  <servlet>
+	<servlet>
 		<servlet-name>ItemInfoRegist</servlet-name>
 		<servlet-class>servlet.ItemInfoRegistServlet</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>ItemInfoChangeListServlet</servlet-name>
 		<servlet-class>servlet.ItemInfoChangeListServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>ItemInfoChangeListServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoChangeListServlet</url-pattern>
@@ -35,11 +38,6 @@
 	<servlet-mapping>
 		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
 		<url-pattern>/jsp/worker/ItemInfoChangeCheckServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>ItemInfoRegist</servlet-name>
-		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -75,6 +73,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SaleBrowseServlet</servlet-name>
+<<<<<<< HEAD
 		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
 	</servlet-mapping><servlet>
 		<servlet-name>PurchaseHistoryServlet</servlet-name>
@@ -84,12 +83,29 @@
 		<url-pattern>/jsp/customer/PurchaseHistoryServlet</url-pattern></servlet-mapping><servlet>
 		<servlet-name>ItemInfoGetServlet</servlet-name>
 		<servlet-class>servlet.ItemInfoGetServlet</servlet-class>
+=======
+		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
+>>>>>>> a399f59c7503639346d477c58940d5b00ac68930
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ItemInfoGetServlet</servlet-name>
-		<url-pattern>/jsp/worker/ItemInfoGetServlet</url-pattern>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<servlet-class>servlet.RecommendRegistServlet</servlet-class>
@@ -98,6 +114,7 @@
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
 	</servlet-mapping>
+<<<<<<< HEAD
 	<servlet>
 		<servlet-name>ItemListServlet</servlet-name>
 		<servlet-class>servlet.ItemListServlet</servlet-class></servlet>
@@ -121,5 +138,39 @@
 		<servlet-class>servlet.PurchaseCheckServlet</servlet-class></servlet>
 	<servlet-mapping>
 		<servlet-name>PurchaseCheckServlet</servlet-name>
-		<url-pattern>/jsp/customer/PurchaseCheckServlet</url-pattern></servlet-mapping></web-app>
-
+		<url-pattern>/jsp/customer/PurchaseCheckServlet</url-pattern></servlet-mapping></web-app><servlet>
+		<servlet-name>RecommendItemNameGetServlet</servlet-name>
+		<servlet-class>servlet.RecommendItemNameGetServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RecommendItemNameGetServlet</servlet-name>
+		<url-pattern>/jsp/customer/RecommendItemNameGetServlet</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>CustomerFilter</filter-name>
+		<filter-class>servlet.CustomerFilter</filter-class>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/jsp/common/Login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CustomerFilter</filter-name>
+		<url-pattern>/jsp/worker/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>CommonFilter</filter-name>
+		<filter-class>servlet.CommonFilter</filter-class>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/jsp/common/Login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CommonFilter</filter-name>
+		<url-pattern>/jsp/customer/*</url-pattern>
+	</filter-mapping>
+	
+</web-app>

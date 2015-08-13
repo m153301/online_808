@@ -43,10 +43,10 @@ public class PurchaseCheckServlet extends HttpServlet{
 					
 			//購入登録
 			ItemPurchaseManager ipManage = new ItemPurchaseManager();
-			ipManage.RegistPurchase(itemId, purQuan, user, price);
+			ipManage.insertPurchase(itemId, purQuan, user, price);
 			
 			ItemPurchaseManager ipManage2 = new ItemPurchaseManager();
-			ipManage2.CalculateItem(itemId, itemLeft);
+			ipManage2.calculateItem(itemId, itemLeft);
 			
 			getServletContext().getRequestDispatcher("/jsp/customer/ItemPurchaseDone.jsp").forward(request, response); 
 			

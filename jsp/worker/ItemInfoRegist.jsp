@@ -41,6 +41,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<input type="hidden" name="token" value="<%= request.getSession().getId() %>"/>
 	</form>
 </body>
 </html>

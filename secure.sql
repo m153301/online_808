@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.23, for osx10.10 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.26, for osx10.10 (x86_64)
 --
 -- Host: localhost    Database: secure
 -- ------------------------------------------------------
--- Server version	5.6.23
+-- Server version	5.6.24
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `creditcard`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `creditcard` (
   `creditcard_id` int(11) NOT NULL AUTO_INCREMENT,
-  `creditcard_type` char(1) NOT NULL,
+  `creditcard_type` int(1) NOT NULL,
   `creditcard_number` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`creditcard_id`),
   UNIQUE KEY `creditcard_id` (`creditcard_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +37,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
+INSERT INTO `creditcard` VALUES (19,1,'80808080'),(20,3,'737373'),(21,2,'8888'),(22,2,'7777');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,6 +62,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES ('8888',000000008888,2),('hazeyama',000000737373,20),('knifmy',000000007777,2),('yahoo',009033692851,19);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,6 +86,7 @@ CREATE TABLE `ip_history` (
 
 LOCK TABLES `ip_history` WRITE;
 /*!40000 ALTER TABLE `ip_history` DISABLE KEYS */;
+INSERT INTO `ip_history` VALUES ('157.105.55.27',0),('157.105.56.196',0),('192.168.1.6',3);
 /*!40000 ALTER TABLE `ip_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +231,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('worker','957bfc4a017b69d7e3ace6f6947f63d5779fc0b7c620b8b908046f72cc88b2d3','worker','worker');
+INSERT INTO `user` VALUES ('den','75ebdf0cde2095afb54a7ff366c24bcc8a68b3e36d447dee3235c94f4e9d748d','電柱','worker'),('hazeyama','699d9ae24a3ef002acf002d744bea1dfa76dc43c62c5cccdecc1786cbbc6fd7f','はぜやま','customer'),('knifmy','024695c64f1a7b917a7ad4c53a2ddd916bf159e0cc0c395177497902500a7637','ふみや','customer'),('mikomiko','330de6760c0dd3d9f8805a8636eefde9078052df7cf1c08308b7ddbe736d8bc8','mikomiko','worker'),('tanese','8730497188dca6f11a3030226105353d0e805d6a29f3cf51158158e89ee73f5e','たねせ','worker'),('work','a0afe8b354c81d63b85e516bd6e7ba9248e47617e9ffa3b79da1a23ecd01a449','worker','worker'),('worker','957bfc4a017b69d7e3ace6f6947f63d5779fc0b7c620b8b908046f72cc88b2d3','worker','worker'),('yahoo','7bd3efadeeb4beae85fa2241c03a62e9cf8c074856e6afff68c11be47b549e80','くつざわ','customer'),('za-wa','ca92da62dffbad9ec662386bf626744245e2fbdfec3d30e5143e6ef52466a074','za-wa','worker');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,7 +256,7 @@ CREATE TABLE `worker` (
 
 LOCK TABLES `worker` WRITE;
 /*!40000 ALTER TABLE `worker` DISABLE KEYS */;
-INSERT INTO `worker` VALUES ('worker');
+INSERT INTO `worker` VALUES ('mikomiko'),('tanese'),('worker'),('za-wa');
 /*!40000 ALTER TABLE `worker` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -266,4 +269,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-26 23:53:24
+-- Dump completed on 2015-08-09  4:27:35
