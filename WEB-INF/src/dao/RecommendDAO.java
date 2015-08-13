@@ -10,8 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
 import utility.DriverAccessor;
 import beans.Recommend;
@@ -24,14 +23,6 @@ public class RecommendDAO extends DriverAccessor{
 		
 		String recommendRegistResult;
 		try{
-			//引数のDateはjava.util.Dateなのでjava.sql.dateに変換
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			cal.set(Calendar.MILLISECOND, 0);
-			java.sql.Date d2 = new java.sql.Date(cal.getTimeInMillis());
 			
 			//sql文の実行
 			String sql = "insert into recommend values(?,?,?)";
@@ -43,7 +34,7 @@ public class RecommendDAO extends DriverAccessor{
 
 			stmt.setInt( 1, itemId );
 			stmt.setString( 2, userId );
-			stmt.setDate( 3, d2 );
+			stmt.setDate( 3, date );
 			
 			stmt.executeUpdate();
 			stmt.close();
@@ -74,15 +65,6 @@ public class RecommendDAO extends DriverAccessor{
 		
 		String recommendRegistResult;
 		try{
-			//Recommendオブジェクトに入っているDateはjava.util.Dateなのでjava.sql.dateに変換
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-			cal.set(Calendar.HOUR_OF_DAY, 0);
-			cal.set(Calendar.MINUTE, 0);
-			cal.set(Calendar.SECOND, 0);
-			cal.set(Calendar.MILLISECOND, 0);
-			java.sql.Date d2 = new java.sql.Date(cal.getTimeInMillis());
-			
 			//sql文の実行
 			String sql = 
 					"update recommend set item_id = ?, recommend_date = ? where user_id ='" + 
@@ -94,7 +76,7 @@ public class RecommendDAO extends DriverAccessor{
 			PreparedStatement stmt = con.prepareStatement(sql);
 			
 			stmt.setInt( 1, itemId );
-			stmt.setDate( 2, d2 );
+			stmt.setDate( 2, date );
 			
 			stmt.executeUpdate();
 			stmt.close();
