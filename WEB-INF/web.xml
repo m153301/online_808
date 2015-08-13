@@ -73,24 +73,20 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SaleBrowseServlet</servlet-name>
-<<<<<<< HEAD
 		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
-	</servlet-mapping><servlet>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>PurchaseHistoryServlet</servlet-name>
 		<servlet-class>servlet.PurchaseHistoryServlet</servlet-class></servlet>
 	<servlet-mapping>
 		<servlet-name>PurchaseHistoryServlet</servlet-name>
-		<url-pattern>/jsp/customer/PurchaseHistoryServlet</url-pattern></servlet-mapping><servlet>
-		<servlet-name>ItemInfoGetServlet</servlet-name>
-		<servlet-class>servlet.ItemInfoGetServlet</servlet-class>
-=======
-		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
+		<url-pattern>/jsp/customer/PurchaseHistoryServlet</url-pattern>
 	</servlet-mapping>
-
+	
 	<servlet>
 		<servlet-name>CustomerInfoRegistServlet</servlet-name>
 		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
->>>>>>> a399f59c7503639346d477c58940d5b00ac68930
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CustomerInfoRegistServlet</servlet-name>
@@ -114,22 +110,29 @@
 		<servlet-name>RecommendRegistServlet</servlet-name>
 		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
 	</servlet-mapping>
-<<<<<<< HEAD
+
 	<servlet>
 		<servlet-name>ItemListServlet</servlet-name>
-		<servlet-class>servlet.ItemListServlet</servlet-class></servlet>
+		<servlet-class>servlet.ItemListServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ItemListServlet</servlet-name>
-		<url-pattern>/jsp/customer/ItemListServlet</url-pattern></servlet-mapping>
+		<url-pattern>/jsp/customer/ItemListServlet</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>ItemPurchaseServlet</servlet-name>
-		<servlet-class>servlet.ItemPurchaseServlet</servlet-class></servlet>
+		<servlet-class>servlet.ItemPurchaseServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ItemPurchaseServlet</servlet-name>
-		<url-pattern>/jsp/customer/ItemPurchaseServlet</url-pattern></servlet-mapping>
+		<url-pattern>/jsp/customer/ItemPurchaseServlet</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>PurchaseRegistServlet</servlet-name>
-		<servlet-class>servlet.PurchaseRegistServlet</servlet-class></servlet>
+		<servlet-class>servlet.PurchaseRegistServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>PurchaseRegistServlet</servlet-name>
 		<url-pattern>/jsp/customer/PurchaseRegistServlet</url-pattern></servlet-mapping>
@@ -138,7 +141,10 @@
 		<servlet-class>servlet.PurchaseCheckServlet</servlet-class></servlet>
 	<servlet-mapping>
 		<servlet-name>PurchaseCheckServlet</servlet-name>
-		<url-pattern>/jsp/customer/PurchaseCheckServlet</url-pattern></servlet-mapping></web-app><servlet>
+		<url-pattern>/jsp/customer/PurchaseCheckServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>RecommendItemNameGetServlet</servlet-name>
 		<servlet-class>servlet.RecommendItemNameGetServlet</servlet-class>
 	</servlet>
