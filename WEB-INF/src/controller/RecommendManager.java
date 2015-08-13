@@ -10,6 +10,8 @@ import java.util.List;
 
 import dao.RecommendDAO;
 import beans.Recommend;
+import dao.ItemDAO;
+import beans.Item;
 
 public class RecommendManager {
 
@@ -48,5 +50,17 @@ public class RecommendManager {
 		itemNameList = recommendDAO.selectRecommendItemName();
 		
 		return itemNameList;
+	}
+	
+	//おすすめを登録するために商品一覧を取得する
+	public List<Item> selectItemAll(){
+		
+		List<Item> items = new ArrayList<Item>();
+		
+		//おすすめテーブルから一覧を取得
+		ItemDAO itemDAO = new ItemDAO();
+		items = itemDAO.selectItemAll();
+		
+		return items;
 	}
 }
