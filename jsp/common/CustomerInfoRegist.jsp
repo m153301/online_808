@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" %>
 <html>
 <head>
 	<title>CustomerInfoRegist</title>
@@ -6,8 +6,16 @@
 </head>
 <body>
 	<br>
+	<%
+		List<String> errors = (List<String>)request.getAttribute("errors");
+		if( errors != null ){
+			out.println("<font color='#f00'>");
+			for(String error : errors) out.println(error + "<br>");
+			out.println("</font>");
+		}
+	%>
 	<br>
-	<form action="./CustomerRegistServlet", method="post">
+	<form action="./CustomerInfoRegistServlet", method="post">
 	<table style="text-align: left; width: 360px; margin-left: auto; margin-right: auto; height: 480px;" border="1" cellpadding="2" cellspacing="2">
 		<tbody>
 			<tr align="center">

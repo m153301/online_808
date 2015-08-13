@@ -2,7 +2,7 @@
 <%@ page import="beans.User" %>
 <%@ page import="beans.Item" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.List" %>
 <html>
 <head>
 	<title>CustomerTop</title>
@@ -12,18 +12,16 @@
 <%
 	User user = (User)session.getAttribute("customer");
 	out.println(user.getUserName() + "さん ようこそ！<br><br>");
-	ArrayList<Item> recommendedItemList = (ArrayList)request.getAttribute("RecommendedItemList");
+	List<String> recommendItemNameList = (List)request.getAttribute("RecommendItemNameList");
 %>
 	<div class="title">
 		☆おすすめ☆<br>
 		<%
-			//iteratorの生成
-			Iterator<Item> iterator=recommendedItemList.iterator();
-			//順番に中身がなくなるまで取り出す
-			while(iterator.hasNext())
+			//順番に取り出す
+			for( int i=0; i < recommendItemNameList.size(); i++ )
 			{
-				Item item = iterator.next();
-				out.println(item.getItemName() + "<br>");
+				String itemName = recommendItemNameList.get(i);
+				out.println(itemName + "<br>");
 			}
 		%>
 		<br>

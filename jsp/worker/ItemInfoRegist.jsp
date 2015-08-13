@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import= "java.util.List" %>
 <html>
 <head>
 	<title>ItemInfoRegist</title>
@@ -8,6 +8,14 @@
 	<div style="text-align: right;"><a href="WorkerTop.jsp">トップに戻る</a><br></div>
 	<br>
 	<br>
+		<%
+		List<String> errors = (List<String>)request.getAttribute("errors");
+		if( errors != null ){
+			out.println("<font color='#f00'>");
+			for(String error : errors) out.println(error + "<br>");
+			out.println("</font>");
+		}
+	%>
 	<form method="post" action="./ItemInfoRegistServlet">
 	<table style="text-align: left; width: 360px; margin-left: auto; margin-right: auto; height: 360px;" border="1" cellpadding="2" cellspacing="2">
 		<tbody>
@@ -33,6 +41,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<input type="hidden" name="token" value="<%= request.getSession().getId() %>"/>
 	</form>
 </body>
 </html>

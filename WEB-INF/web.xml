@@ -4,5 +4,179 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
 	version="2.4">
 
-</web-app>
+	<servlet>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<servlet-class>servlet.ItemInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoRegist</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoRegistServlet</url-pattern>
+	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ItemInfoChangeListServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeListServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeListServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemInfoChangeServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
+		<servlet-class>servlet.ItemInfoChangeCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemInfoChangeCheckServlet</servlet-name>
+		<url-pattern>/jsp/worker/ItemInfoChangeCheckServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/jsp/common/LoginServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>LogOutServlet</servlet-name>
+		<servlet-class>servlet.LogOutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogOutServlet</servlet-name>
+		<url-pattern>/jsp/common/LogOutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OrderHistoryServlet</servlet-name>
+		<servlet-class>servlet.OrderHistoryBrowseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OrderHistoryServlet</servlet-name>
+		<url-pattern>/jsp/worker/OrderHistoryBrowseServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SaleBrowseServlet</servlet-name>
+		<servlet-class>servlet.SaleBrowseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SaleBrowseServlet</servlet-name>
+		<url-pattern>/jsp/worker/SaleBrowseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PurchaseHistoryServlet</servlet-name>
+		<servlet-class>servlet.PurchaseHistoryServlet</servlet-class></servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseHistoryServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseHistoryServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.CustomerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/common/CustomerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<servlet-class>servlet.WorkerInfoRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WorkerInfoRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/WorkerInfoRegistServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RecommendRegistServlet</servlet-name>
+		<servlet-class>servlet.RecommendRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RecommendRegistServlet</servlet-name>
+		<url-pattern>/jsp/worker/RecommendRegistServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ItemListServlet</servlet-name>
+		<servlet-class>servlet.ItemListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemListServlet</servlet-name>
+		<url-pattern>/jsp/customer/ItemListServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ItemPurchaseServlet</servlet-name>
+		<servlet-class>servlet.ItemPurchaseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ItemPurchaseServlet</servlet-name>
+		<url-pattern>/jsp/customer/ItemPurchaseServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PurchaseRegistServlet</servlet-name>
+		<servlet-class>servlet.PurchaseRegistServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseRegistServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseRegistServlet</url-pattern></servlet-mapping>
+	<servlet>
+		<servlet-name>PurchaseCheckServlet</servlet-name>
+		<servlet-class>servlet.PurchaseCheckServlet</servlet-class></servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseCheckServlet</servlet-name>
+		<url-pattern>/jsp/customer/PurchaseCheckServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RecommendItemNameGetServlet</servlet-name>
+		<servlet-class>servlet.RecommendItemNameGetServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RecommendItemNameGetServlet</servlet-name>
+		<url-pattern>/jsp/customer/RecommendItemNameGetServlet</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>CustomerFilter</filter-name>
+		<filter-class>servlet.CustomerFilter</filter-class>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/jsp/common/Login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CustomerFilter</filter-name>
+		<url-pattern>/jsp/worker/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>CommonFilter</filter-name>
+		<filter-class>servlet.CommonFilter</filter-class>
+		<init-param>
+			<param-name>loginPage</param-name>
+			<param-value>/jsp/common/Login.jsp</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CommonFilter</filter-name>
+		<url-pattern>/jsp/customer/*</url-pattern>
+	</filter-mapping>
+	
+</web-app>
